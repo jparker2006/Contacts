@@ -2,15 +2,14 @@
 #define LOGIN_H
 
 #include <QMainWindow>
-#include <QCryptographicHash>
-#include <QSqlDatabase>
-#include <QSqlQuery>
 
 #include "ui_login.h"
 
+QT_BEGIN_NAMESPACE
 namespace Ui {
     class Login;
 }
+QT_END_NAMESPACE
 
 class Login: public QMainWindow {
     Q_OBJECT
@@ -18,8 +17,7 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 private slots:
-    void on_create_clicked();
-
+    void on_signup_clicked();
 private:
     Ui::Login *ui;
 };

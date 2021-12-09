@@ -2,14 +2,23 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     // if !cookies -> login
-    LoginFrame();
+    LoginFrame(false);
     // else -> send to contacts
     //this->setWindowTitle("Contacts");
 }
 
-void MainWindow::LoginFrame() {
-    Login *login = new Login();
+void MainWindow::LoginFrame(bool bSignIn) { // true ? delete sign in : none
+    if (bSignIn)
+        signup->hide();
+
     login->show();
+}
+
+void MainWindow::SignUpFrame(bool bLogin) {
+    if (bLogin)
+        login->hide();
+
+    signup->show();
 }
 
 void MainWindow::MainFrame() {

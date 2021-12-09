@@ -1,2 +1,2 @@
 # Contacts
-encrypted contacts storage app and website
+encrypted contacts storage desktop app
