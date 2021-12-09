@@ -70,3 +70,6 @@ Thumbs.db
 # --------
 *.dll
 *.exe
+
+build-Contacts-Desktop-Release
+build-Contacts-Desktop-Release*
