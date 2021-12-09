@@ -2,6 +2,9 @@
 #define LOGIN_H
 
 #include <QMainWindow>
+#include <QCryptographicHash>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 #include "ui_login.h"
 

@@ -1,15 +1,13 @@
-QT += core gui
+QT += core gui sql network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 SOURCES += \
     src/login.cpp \
     src/mainwindow.cpp \
-    main.cpp \
-    SHA256/src/SHA256.cpp
+    main.cpp
 HEADERS += \
     include/mainwindow.h \
-    include/login.h \
-    SHA256/include/SHA256.h
+    include/login.h
 FORMS += \
     ui/login.ui
 qnx: target.path = /tmp/$${TARGET}/bin
