@@ -1,5 +1,6 @@
 #include "include/signup.h"
 #include "include/mainwindow.h"
+#include "crypto/sha3.h"
 
 extern MainWindow *w;
 
@@ -26,13 +27,11 @@ void SignUp::on_create_clicked() {
         return;
     }
 
-    QCryptographicHash *hasher = new QCryptographicHash(QCryptographicHash::RealSha3_256);
-    hasher->addData(sUsername.toUtf8());
-    QString sHashedUN = hasher->result().toBase64();
-    setWindowTitle(sHashedUN);
-    hasher->reset();
-    hasher->addData(sHashedUN.toUtf8());
-    ui->label->setText(hasher->result().toBase64());
+    SHA3 hasher;
+
+    std::string sHashedUN = hasher(sPassword.toStdString());
+    setWindowTitle(QString::fromStdString(sHashedUN));
+//    qDebug() << sHashedUN;
 
     return;
 

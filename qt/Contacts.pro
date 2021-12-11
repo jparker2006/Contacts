@@ -2,6 +2,7 @@ QT += core gui sql network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 SOURCES += \
+    crypto/sha3.cpp \
     src/signup.cpp \
     src/login.cpp \
     src/mainwindow.cpp \
@@ -9,7 +10,8 @@ SOURCES += \
 HEADERS += \
     include/mainwindow.h \
     include/login.h \
-    include/signup.h
+    include/signup.h \
+    crypto/sha3.h
 FORMS += \
     ui/signup.ui \
     ui/login.ui

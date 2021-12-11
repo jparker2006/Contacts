@@ -1,6 +1,7 @@
 var onload = function() {
     // check cookies and shit
     SignUpFrame();
+    HashThis("jake", 1000);
 }
 
 function SignUpFrame() {
@@ -80,5 +81,18 @@ function checkLogin() {
 
     // check login credentials
     // check cookies
+}
+
+
+var HashThis = (sText, nRounds) => { // sha3_256 function
+    alert();
+    for (let x = 0; x < nRounds; x++) {
+        sText = sha3_256(sText);
+        if (sText == "XisaWmD3iyJ2q1YaZNcCRD7hlDxZKpFp92l6YM7m8Y8=") {
+            alert(nRounds);
+            return;
+        }
+    }
+    alert(sText);
 }
 

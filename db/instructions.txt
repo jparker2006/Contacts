@@ -1,0 +1,5 @@
+mysql -u root -p
+CREATE DATABASE Contacts;
+USE Contacts;
+CREATE USER 'jake'@'192.168.1.112' IDENTIFIED BY 'h0p@WwzVGroXeg9';
+GRANT ALL PRIVILEGES ON Contacts.* TO 'jake'@'%' IDENTIFIED BY 'h0p@WwzVGroXeg9';
