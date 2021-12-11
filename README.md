@@ -4,8 +4,7 @@ desktop application and website to keep your data safe and easy to access
 qt6 c++<br>
 download instructions...
 ## Website
-frontend: vanilla js<br>
-backend: modified lamp stack (qt6 c++ replacing php)<br>site linked
+vanilla js and css paired with a LAMP stack<br>site linked
 <a href="http://jakehenryparker.com:56112/Contacts/"> here</a>
 ## Storage
 everything is stored remotely on maria db<br>

@@ -1,7 +1,13 @@
+var g_sNoCookiesKey = "";
+
 var onload = function() {
-    // check cookies and shit
+    let UN = getCookie('UN');
+    let PW = getCookie('PW');
+    if (UN && PW) {
+        Login(UN, PW);
+        return;
+    }
     SignUpFrame();
-    HashThis("jake", 1000);
 }
 
 function SignUpFrame() {
@@ -38,6 +44,13 @@ function LoginFrame() {
     sPage += "</div>";
     sPage += "</div>";
     sPage += "</div>";
+    sPage += "<div id='Toast' class='Toast'></div>";
+    document.getElementById('Main').innerHTML = sPage;
+}
+
+function MainFrame() {
+    let sPage = "";
+    sPage += "<div id='Toast' class='Toast'></div>";
     document.getElementById('Main').innerHTML = sPage;
 }
 
@@ -47,9 +60,9 @@ function toggleMemory() {
 }
 
 function createAccount() {
-    const sUsername = document.getElementById('username').value;
-    const sPassword = document.getElementById('password').value;
-    const sConfirm = document.getElementById('confirm').value;
+    let sUsername = document.getElementById('username').value.trim();
+    let sPassword = document.getElementById('password').value.trim();
+    let sConfirm = document.getElementById('confirm').value.trim();
 
     if (!sUsername || !sPassword || !sConfirm) {
         document.getElementById('feedback').style.color = "rgb(185, 9, 11)";
@@ -62,37 +75,74 @@ function createAccount() {
         return;
     }
 
-    // qt check username avail
-    // make account
-    // check cookies with let bOff = document.getElementById('Memory').style.color === "rgb(185, 9, 11)";
-    document.getElementById('feedback').style.color = "#A4C639";
-    document.getElementById('feedback').innerHTML = "account created"; // maybe toast this
+    sUsername = HashThis(sUsername, 10000);
+
+    postFileFromServer("srv/signin.php", "uniqueUN=" + encodeURIComponent(sUsername), uniqueUNCallback);
+    function uniqueUNCallback(data) {
+        if (data) {
+            document.getElementById('feedback').style.color = "rgb(185, 9, 11)";
+            document.getElementById('feedback').innerHTML = "username taken, sorry";
+            return;
+        }
+    }
+
+    sPassword = HashThis(sPassword, 10000);
+
+    if (document.getElementById('Memory').style.color !== "rgb(185, 9, 11)") {
+        setCookie('UN', sUsername, 999);
+        setCookie('PW', sPassword, 999);
+    }
+    else
+        g_sNoCookiesKey = HashThis(sPassword, 10000);
+
+    let objUserData = {};
+    objUserData.username = sUsername;
+    objUserData.password = HashThis(sPassword, 20000);
+    let jsonUserData = JSON.stringify(objUserData);
+    postFileFromServer("srv/signin.php", "createAccount=" + encodeURIComponent(jsonUserData), createAccountCallback);
+    function createAccountCallback(data) {
+        if (data) {
+            MainFrame();
+            Toast("Account Created");
+        }
+    }
 }
 
 function checkLogin() {
-    const sUsername = document.getElementById('username').value;
-    const sPassword = document.getElementById('password').value;
-
+    let sUsername = document.getElementById('username').value;
+    let sPassword = document.getElementById('password').value;
     if (!sUsername || !sPassword) {
         document.getElementById('feedback').style.color = "rgb(185, 9, 11)";
         document.getElementById('feedback').innerHTML = "please fill out all fields";
         return;
     }
-
-    // check login credentials
-    // check cookies
-}
-
-
-var HashThis = (sText, nRounds) => { // sha3_256 function
-    alert();
-    for (let x = 0; x < nRounds; x++) {
-        sText = sha3_256(sText);
-        if (sText == "XisaWmD3iyJ2q1YaZNcCRD7hlDxZKpFp92l6YM7m8Y8=") {
-            alert(nRounds);
-            return;
-        }
+    sUsername = HashThis(sUsername, 10000);
+    sPassword = HashThis(sPassword, 10000);
+    if (document.getElementById('Memory').style.color !== "rgb(185, 9, 11)") {
+        setCookie('UN', sUsername, 999);
+        setCookie('PW', sPassword, 999);
     }
-    alert(sText);
+    else
+        g_sNoCookiesKey = sPassword;
+
+    Login(sUsername, sPassword);
 }
+
+function Login(UN, PW) {
+    PW = HashThis(PW, 20000);
+
+    let objCredentials = {};
+    objCredentials.un = UN;
+    objCredentials.pw = PW;
+    let jsonCredentials = JSON.stringify (objCredentials);
+
+    postFileFromServer("srv/signin.php", "login=" + encodeURIComponent(jsonCredentials), LogInCallback);
+    function LogInCallback(data) {
+        if (data)
+            MainFrame();
+        else
+            Toast("Login failed");
+    }
+}
+
 
