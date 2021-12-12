@@ -1,10 +1,11 @@
 #include "include/mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
-    // if !cookies -> login
-    LoginFrame(false);
-    // else -> send to contacts
-    //this->setWindowTitle("Contacts");
+    QList<QString> cookies = LoadCookies();
+    if (cookies.size() != 2)
+        SignUpFrame(false);
+    else
+        MainFrame(cookies[0], cookies[1]);
 }
 
 void MainWindow::LoginFrame(bool bSignIn) { // true ? delete sign in : none
@@ -21,19 +22,43 @@ void MainWindow::SignUpFrame(bool bLogin) {
     signup->show();
 }
 
-void MainWindow::MainFrame() {
-    return;
+void MainWindow::MainFrame(QString un, QString pw) {
+    main->passUserData(un, pw);
+
+    if (login->isEnabled())
+        login->hide();
+    else if (signup->isEnabled())
+        signup->hide();
+
+    main->show();
 }
 
-//void MainWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
-//    item->setText("poopy");
-//}
+void MainWindow::SaveCookies(QString UN, QString PW) { static
+    QSettings cookies("Contacts", "cookies");
+    cookies.beginGroup("CookiesGroup");
+    cookies.setValue("UN", UN);
+    cookies.setValue("PW", PW);
+    cookies.endGroup();
+}
 
-//void MainWindow::on_add_clicked() {
-//    ui->list->addItem("jake parker");
-//}
+QList<QString> MainWindow::LoadCookies() {
+    QSettings cookies("Contacts", "cookies");
+    cookies.beginGroup("CookiesGroup");
+    QString un = cookies.value("UN").toString();
+    QString pw = cookies.value("PW").toString();
+    cookies.endGroup();
 
-//void MainWindow::on_ajax_textChanged(const QString &sAjax) {
-//    ui->list->addItem(sAjax); // ajax db
-//}
+    if (un.isEmpty() || pw.isEmpty())
+        return QList<QString> {"no cookies"};
+    else
+        return QList<QString> {un, pw};
+}
+
+void MainWindow::ClearCookies() { // just for testing purposes
+    QSettings cookies("Contacts", "cookies");
+    cookies.beginGroup("CookiesGroup");
+    cookies.setValue("UN", "");
+    cookies.setValue("PW", "");
+    cookies.endGroup();
+}
 

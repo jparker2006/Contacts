@@ -27,44 +27,43 @@ void SignUp::on_create_clicked() {
         return;
     }
 
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("192.168.1.112");
+    db.setDatabaseName("Contacts");
+    db.setUserName("jake_contacts");
+    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
+    db.open();
+
     SHA3 hasher;
+    std::string sHashedUN = sUsername.toStdString();
+    for (int i=0; i<10000; i++) {
+        sHashedUN = hasher(sHashedUN);
+    }
 
-    std::string sHashedUN = hasher(sPassword.toStdString());
-    setWindowTitle(QString::fromStdString(sHashedUN));
-//    qDebug() << sHashedUN;
+    QSqlQuery q_unique("SELECT * FROM Users WHERE username='" + QString::fromStdString(sHashedUN) + "'");
+    if (q_unique.next()) {
+        ui->label->setText("username taken");
+        return;
+    }
 
-    return;
+    std::string sHashedPW = sPassword.toStdString();
+    for (int i=0; i<10000; i++) {
+        sHashedPW = hasher(sHashedPW);
+    }
 
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-//    db.setHostName("192.168.1.112");
-//    db.setDatabaseName("Contacts");
-//    db.setUserName("jake");
-//    db.setPassword("h0p@WwzVGroXeg9");
-//    db.open();
+    MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW));
 
-//    QCryptographicHash *hasher = new QCryptographicHash(QCryptographicHash::RealSha3_256);
-//    hasher->addData(sUsername.toUtf8());
-//    QString sHashedUN = hasher->result().toBase64();
-//    hasher->reset();
+    for (int i=0; i<20000; i++) {
+        sHashedPW = hasher(sHashedPW);
+    }
 
-//    QSqlQuery q_unique("SELECT * FROM Users WHERE username='" + sHashedUN + "'");
-//    if (q_unique.next()) {
-//        ui->label->setText("username taken");
-//        return;
-//    }
-
-//    QSqlQuery q_insert(db);
-//    q_insert.prepare("INSERT INTO Users (username, password) VALUES (:username, :password)");
-//    q_insert.bindValue(":username", sHashedUN);
-
-//    hasher->addData(sPassword.toUtf8());
-//    q_insert.bindValue(":password", hasher->result().toBase64());
-//    hasher->reset();
-
-//    q_insert.exec();
-//    db.close();
-
-//    ui->label->setText("account created!");
+    QSqlQuery q_insert(db);
+    q_insert.prepare("INSERT INTO Users (username, password) VALUES (:username, :password)");
+    q_insert.bindValue(":username", QString::fromStdString(sHashedUN));
+    q_insert.bindValue(":password", QString::fromStdString(sHashedPW));
+    q_insert.exec();
+    db.close();
+    ui->label->setText("account created!");
 }
 
 

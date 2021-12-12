@@ -32,7 +32,7 @@
    <widget class="QCommandLinkButton" name="signup">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>175</x>
       <y>500</y>
       <width>250</width>
       <height>30</height>
@@ -51,27 +51,6 @@
     </property>
     <property name="text">
      <string>Dont Have An Account?</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="remember">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>500</y>
-      <width>135</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Remember Me</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -197,7 +176,6 @@ border-radius: 4px;</string>
     </property>
    </widget>
    <zorder>signup</zorder>
-   <zorder>remember</zorder>
    <zorder>label</zorder>
    <zorder>login</zorder>
    <zorder>password</zorder>
