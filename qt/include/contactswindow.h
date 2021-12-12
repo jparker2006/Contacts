@@ -17,6 +17,8 @@ public:
     explicit ContactsWindow(QWidget *parent = nullptr);
     ~ContactsWindow();
     void passUserData(QString un, QString pw);
+private slots:
+    void on_add_clicked();
 private:
     Ui::ContactsWindow *ui;
     QString un;

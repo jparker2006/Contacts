@@ -10,14 +10,18 @@
 #include "include/login.h"
 #include "include/signup.h"
 #include "include/contactswindow.h"
+#include "include/add.h"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
+
     void LoginFrame(bool bSignIn);
     void SignUpFrame(bool bLogin);
     void MainFrame(QString un, QString pw);
+    void AddFrame();
+
     static void SaveCookies(QString UN, QString PW);
     QList<QString> LoadCookies();
     void ClearCookies();
@@ -25,5 +29,6 @@ private:
     SignUp *signup = new SignUp();
     Login *login = new Login();
     ContactsWindow *main = new ContactsWindow();
+    Add *add = new Add();
 };
 #endif // MAINWINDOW_H

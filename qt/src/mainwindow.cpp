@@ -33,6 +33,11 @@ void MainWindow::MainFrame(QString un, QString pw) {
     main->show();
 }
 
+void MainWindow::AddFrame() {
+    main->hide();
+    add->show();
+}
+
 void MainWindow::SaveCookies(QString UN, QString PW) { static
     QSettings cookies("Contacts", "cookies");
     cookies.beginGroup("CookiesGroup");

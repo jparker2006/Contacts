@@ -26,7 +26,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: darkslategray;</string>
+   <string notr="true">background-color: #657786;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QCommandLinkButton" name="signup">
