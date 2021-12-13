@@ -16,13 +16,14 @@ class ContactsWindow: public QMainWindow {
 public:
     explicit ContactsWindow(QWidget *parent = nullptr);
     ~ContactsWindow();
-    void passUserData(QString un, QString pw);
+    void passUserData(QString un, QString pw, int id);
 private slots:
     void on_add_clicked();
 private:
     Ui::ContactsWindow *ui;
     QString un;
     QString pw;
+    int id;
 };
 
 #endif // CONTACTSWINDOW_H

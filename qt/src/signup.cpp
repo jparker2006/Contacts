@@ -1,6 +1,5 @@
 #include "include/signup.h"
 #include "include/mainwindow.h"
-#include "crypto/sha3.h"
 
 extern MainWindow *w;
 
@@ -47,13 +46,15 @@ void SignUp::on_create_clicked() {
     }
 
     std::string sHashedPW = sPassword.toStdString();
-    for (int i=0; i<10000; i++) {
+    for (int i=0; i<20000; i++) {
         sHashedPW = hasher(sHashedPW);
     }
 
+    QString sAESPw = QString::fromStdString(sHashedPW);
+
     MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW));
 
-    for (int i=0; i<20000; i++) {
+    for (int i=0; i<10000; i++) {
         sHashedPW = hasher(sHashedPW);
     }
 
@@ -64,6 +65,8 @@ void SignUp::on_create_clicked() {
     q_insert.exec();
     db.close();
     ui->label->setText("account created!");
+
+    w->MainFrame(QString::fromStdString(sHashedUN), sAESPw);
 }
 
 

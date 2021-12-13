@@ -1,6 +1,5 @@
 #include "include/login.h"
 #include "include/mainwindow.h"
-#include "crypto/sha3.h"
 
 extern MainWindow *w;
 
@@ -40,7 +39,7 @@ void Login::on_login_clicked() {
 
 
     std::string sHashedPW = sPassword.toStdString();
-    for (int i=0; i<10000; i++) {
+    for (int i=0; i<20000; i++) {
         sHashedPW = hasher(sHashedPW);
     }
 
@@ -48,7 +47,7 @@ void Login::on_login_clicked() {
 
     MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW));
 
-    for (int i=0; i<20000; i++) {
+    for (int i=0; i<10000; i++) {
         sHashedPW = hasher(sHashedPW);
     }
 

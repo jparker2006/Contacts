@@ -23,7 +23,20 @@ void MainWindow::SignUpFrame(bool bLogin) {
 }
 
 void MainWindow::MainFrame(QString un, QString pw) {
-    main->passUserData(un, pw);
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("192.168.1.112");
+    db.setDatabaseName("Contacts");
+    db.setUserName("jake_contacts");
+    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
+    db.open();
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM Users WHERE username=:username");
+    query.bindValue(":username", un);
+    query.exec();
+    query.next();
+    main->passUserData(un, pw, query.value(0).toInt());
+    db.close();
 
     if (login->isEnabled())
         login->hide();
@@ -33,8 +46,9 @@ void MainWindow::MainFrame(QString un, QString pw) {
     main->show();
 }
 
-void MainWindow::AddFrame() {
+void MainWindow::AddFrame(QString un, QString pw, int id) {
     main->hide();
+    add->passUserData(un, pw, id);
     add->show();
 }
 

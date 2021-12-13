@@ -12,12 +12,13 @@ ContactsWindow::~ContactsWindow() {
     delete ui;
 }
 
-void ContactsWindow::passUserData(QString un, QString pw) {
+void ContactsWindow::passUserData(QString un, QString pw, int id) {
     this->un = un;
     this->pw = pw;
+    this->id = id;
 }
 
 void ContactsWindow::on_add_clicked() {
-    w->AddFrame();
+    w->AddFrame(un, pw, id);
 }
 

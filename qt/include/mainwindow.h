@@ -20,7 +20,7 @@ public:
     void LoginFrame(bool bSignIn);
     void SignUpFrame(bool bLogin);
     void MainFrame(QString un, QString pw);
-    void AddFrame();
+    void AddFrame(QString un, QString pw, int id);
 
     static void SaveCookies(QString UN, QString PW);
     QList<QString> LoadCookies();
