@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 #include "ui_add.h"
 #include "crypto/qaesencryption.h"

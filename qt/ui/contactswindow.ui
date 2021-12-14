@@ -38,8 +38,15 @@
       <height>550</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #F5F8FA;</string>
+     <string notr="true">background-color: #F5F8FA;
+color: #14171A;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="add">
@@ -53,7 +60,6 @@
     </property>
     <property name="font">
      <font>
-      <family>Roboto</family>
       <pointsize>28</pointsize>
      </font>
     </property>
@@ -82,7 +88,6 @@ border-radius: 6px;
     </property>
     <property name="font">
      <font>
-      <family>Roboto</family>
       <pointsize>22</pointsize>
      </font>
     </property>
@@ -109,7 +114,6 @@ border: 1px solid #AAB8C2;</string>
     </property>
     <property name="font">
      <font>
-      <family>Roboto</family>
       <pointsize>20</pointsize>
      </font>
     </property>

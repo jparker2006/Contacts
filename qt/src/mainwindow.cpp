@@ -44,6 +44,13 @@ void MainWindow::MainFrame(QString un, QString pw) {
         signup->hide();
 
     main->show();
+    main->pullData();
+}
+
+void MainWindow::MainFrame() {
+    add->hide();
+    main->show();
+    main->pullData();
 }
 
 void MainWindow::AddFrame(QString un, QString pw, int id) {
