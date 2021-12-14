@@ -48,12 +48,6 @@ function LoginFrame() {
     document.getElementById('Main').innerHTML = sPage;
 }
 
-function MainFrame() {
-    let sPage = "";
-    sPage += "<div id='Toast' class='Toast'></div>";
-    document.getElementById('Main').innerHTML = sPage;
-}
-
 function toggleMemory() {
     let bOff = document.getElementById('Memory').style.color === "rgb(185, 9, 11)";
     document.getElementById('Memory').style.color = bOff ? "#A4C639" : "#B9090B";
