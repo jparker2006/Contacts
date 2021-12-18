@@ -11,6 +11,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/main.cpp
 HEADERS += \
+    include/serverdata.h \
     crypto/qaesencryption.h \
     include/add.h \
     include/contactswindow.h \
