@@ -48,12 +48,7 @@ void Add::on_add_clicked() {
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
     QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toLocal8Bit());
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("192.168.1.112");
-    db.setDatabaseName("Contacts");
-    db.setUserName("jake_contacts");
-    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
-    db.open();
+    QSqlDatabase db = MainWindow::SetUpDatabase();
 
     QSqlQuery query(db);
     query.prepare("INSERT INTO Contacts (user, data) VALUES (:user, :data)");

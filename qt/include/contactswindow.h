@@ -22,6 +22,8 @@ public:
     void pullData();
 private slots:
     void on_add_clicked();
+    void on_list_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::ContactsWindow *ui;
     QString un;

@@ -24,32 +24,50 @@ void ContactsWindow::on_add_clicked() {
 
 void ContactsWindow::pullData() {
     ui->list->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("192.168.1.112");
-    db.setDatabaseName("Contacts");
-    db.setUserName("jake_contacts");
-    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
-    db.open();
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
+    QSqlDatabase db = MainWindow::SetUpDatabase();
 
     QSqlQuery pull(db);
-    pull.prepare("SELECT data FROM Contacts WHERE user=:id");
+    pull.prepare("SELECT id, data FROM Contacts WHERE user=:id");
     pull.bindValue(":id", this->id);
     pull.exec();
     while (pull.next()) {
-        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(pull.value(0).toByteArray(), pw.toLocal8Bit())));
+        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(pull.value(1).toByteArray(), pw.toLocal8Bit())));
         QJsonObject objContactData = jsonContactData.object();
-        if (objContactData["first"].toString().isEmpty())
-            ui->list->addItem(objContactData["company"].toString());
-        else
-            ui->list->addItem(objContactData["first"].toString() + " " + objContactData["last"].toString());
+        if (objContactData["first"].toString().isEmpty()) {
+            QListWidgetItem *item = new QListWidgetItem();
+            item->setData(-1, pull.value(0).toInt());
+            item->setText(objContactData["company"].toString());
+            ui->list->addItem(item);
+        }
+        else {
+            QListWidgetItem *item = new QListWidgetItem();
+            item->setData(-1, pull.value(0).toInt());
+            item->setText(objContactData["first"].toString() + " " + objContactData["last"].toString());
+            ui->list->addItem(item);
+        }
     }
 
     db.close();
     delete cipher;
 }
 
+
+void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
+    QSqlDatabase db = MainWindow::SetUpDatabase();
+    QSqlQuery query(db);
+    query.prepare("SELECT data FROM Contacts WHERE id=:id");
+    query.bindValue(":id", item->data(-1).toInt());
+    query.exec();
+    query.next();
+
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
+
+    QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toLocal8Bit())));
+    QJsonObject objContactData = jsonContactData.object();
+    w->EditFrame(item->data(-1).toInt(), objContactData);
+}
 
 
 

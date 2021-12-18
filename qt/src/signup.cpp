@@ -26,12 +26,7 @@ void SignUp::on_create_clicked() {
         return;
     }
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("192.168.1.112");
-    db.setDatabaseName("Contacts");
-    db.setUserName("jake_contacts");
-    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
-    db.open();
+    QSqlDatabase db = MainWindow::SetUpDatabase();
 
     SHA3 hasher;
     std::string sHashedUN = sUsername.toStdString();

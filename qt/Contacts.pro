@@ -3,6 +3,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 SOURCES += \
     crypto/qaesencryption.cpp \
+    src/edit.cpp \
     src/add.cpp \
     src/contactswindow.cpp \
     crypto/sha3.cpp \
@@ -11,6 +12,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/main.cpp
 HEADERS += \
+    include/edit.h \
     include/serverdata.h \
     crypto/qaesencryption.h \
     include/add.h \
@@ -20,6 +22,7 @@ HEADERS += \
     include/signup.h \
     crypto/sha3.h
 FORMS += \
+    ui/edit.ui \
     ui/add.ui \
     ui/contactswindow.ui \
     ui/signup.ui \

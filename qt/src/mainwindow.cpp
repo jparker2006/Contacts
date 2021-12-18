@@ -23,12 +23,7 @@ void MainWindow::SignUpFrame(bool bLogin) {
 }
 
 void MainWindow::MainFrame(QString un, QString pw) {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("192.168.1.112");
-    db.setDatabaseName("Contacts");
-    db.setUserName("jake_contacts");
-    db.setPassword("Yv9zEtKfr5yMPgkvWa4v9N");
-    db.open();
+    QSqlDatabase db = SetUpDatabase();
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM Users WHERE username=:username");
@@ -48,7 +43,10 @@ void MainWindow::MainFrame(QString un, QString pw) {
 }
 
 void MainWindow::MainFrame() {
-    add->hide();
+    if (add->isEnabled())
+        add->hide();
+    if (edit->isEnabled())
+        edit->hide();
     main->show();
     main->pullData();
 }
@@ -57,6 +55,12 @@ void MainWindow::AddFrame(QString un, QString pw, int id) {
     main->hide();
     add->passUserData(un, pw, id);
     add->show();
+}
+
+void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
+    main->hide();
+    edit->passData(itemID, objContactData);
+    edit->show();
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW) { static
@@ -86,5 +90,16 @@ void MainWindow::ClearCookies() { // just for testing purposes
     cookies.setValue("UN", "");
     cookies.setValue("PW", "");
     cookies.endGroup();
+}
+
+QSqlDatabase MainWindow::SetUpDatabase() {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("192.168.1.112");
+    //db.setPort(PORT);
+    db.setDatabaseName("Contacts");
+    db.setUserName("jake_contacts");
+    db.setPassword(DB_PASSWORD);
+    db.open();
+    return db;
 }
 
