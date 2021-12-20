@@ -57,9 +57,9 @@ void MainWindow::AddFrame(QString un, QString pw, int id) {
     add->show();
 }
 
-void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
+void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw) {
     main->hide();
-    edit->passData(itemID, objContactData);
+    edit->passData(itemID, objContactData, pw);
     edit->show();
 }
 
@@ -94,6 +94,7 @@ void MainWindow::ClearCookies() { // just for testing purposes
 
 QSqlDatabase MainWindow::SetUpDatabase() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    //db.setHostName(IP);
     db.setHostName("192.168.1.112");
     //db.setPort(PORT);
     db.setDatabaseName("Contacts");

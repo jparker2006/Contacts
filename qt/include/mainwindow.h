@@ -28,7 +28,7 @@ public:
     void MainFrame(QString un, QString pw);
     void MainFrame(); // coming back from adding item
     void AddFrame(QString un, QString pw, int id);
-    void EditFrame(int itemID, QJsonObject objContactData);
+    void EditFrame(int itemID, QJsonObject objContactData, QString key);
 private:
     SignUp *signup = new SignUp();
     Login *login = new Login();

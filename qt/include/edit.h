@@ -16,16 +16,19 @@ class Edit: public QMainWindow {
 public:
     explicit Edit(QWidget *parent = nullptr);
     ~Edit();
-    void passData(int id, QJsonObject objData);
+    void passData(int id, QJsonObject objData, QString key);
     void setupContactData();
 private slots:
     void on_b_back_clicked();
     void on_b_delete_clicked();
 
+    void on_add_clicked();
+
 private:
     Ui::Edit *ui;
     QJsonObject objContactData;
     int nId;
+    QString key;
 };
 
 #endif // EDIT_H

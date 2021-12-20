@@ -66,7 +66,7 @@ void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
 
     QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toLocal8Bit())));
     QJsonObject objContactData = jsonContactData.object();
-    w->EditFrame(item->data(-1).toInt(), objContactData);
+    w->EditFrame(item->data(-1).toInt(), objContactData, this->pw);
 }
 
 

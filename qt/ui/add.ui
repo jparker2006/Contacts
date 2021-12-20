@@ -40,7 +40,6 @@
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -68,7 +67,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -96,7 +94,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -124,7 +121,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -138,7 +134,7 @@ border-radius: 3px;</string>
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Adress</string>
+     <string>Address</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="work">
@@ -152,7 +148,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -180,7 +175,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -208,7 +202,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -239,7 +232,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -267,7 +259,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -288,14 +279,13 @@ border-radius: 3px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>290</y>
+      <y>360</y>
       <width>285</width>
       <height>60</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -315,15 +305,14 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="website">
     <property name="geometry">
      <rect>
-      <x>305</x>
-      <y>290</y>
+      <x>310</x>
+      <y>360</y>
       <width>285</width>
       <height>60</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -343,15 +332,14 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="state">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>360</y>
+      <x>210</x>
+      <y>290</y>
       <width>185</width>
       <height>60</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -374,15 +362,14 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="zip">
     <property name="geometry">
      <rect>
-      <x>405</x>
-      <y>360</y>
-      <width>185</width>
+      <x>400</x>
+      <y>290</y>
+      <width>191</width>
       <height>60</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -405,15 +392,14 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="city">
     <property name="geometry">
      <rect>
-      <x>207</x>
-      <y>360</y>
-      <width>185</width>
+      <x>10</x>
+      <y>290</y>
+      <width>191</width>
       <height>60</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -444,7 +430,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -472,7 +457,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -500,7 +484,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>37</pointsize>
      </font>
     </property>
@@ -528,7 +511,6 @@ border-radius: 3px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -547,6 +529,26 @@ border-radius: 3px;</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>first</tabstop>
+  <tabstop>middle</tabstop>
+  <tabstop>last</tabstop>
+  <tabstop>company</tabstop>
+  <tabstop>title</tabstop>
+  <tabstop>home</tabstop>
+  <tabstop>mobile</tabstop>
+  <tabstop>work</tabstop>
+  <tabstop>adress</tabstop>
+  <tabstop>city</tabstop>
+  <tabstop>state</tabstop>
+  <tabstop>zip</tabstop>
+  <tabstop>email</tabstop>
+  <tabstop>website</tabstop>
+  <tabstop>birthday</tabstop>
+  <tabstop>anniversary</tabstop>
+  <tabstop>notes</tabstop>
+  <tabstop>add</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
