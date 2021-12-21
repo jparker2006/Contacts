@@ -25,7 +25,7 @@ void ContactsWindow::on_add_clicked() {
 void ContactsWindow::pullData() {
     ui->list->clear();
 
-    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
 
     QSqlQuery pull(db);
@@ -62,7 +62,7 @@ void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
     query.exec();
     query.next();
 
-    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
 
     QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toLocal8Bit())));
     QJsonObject objContactData = jsonContactData.object();

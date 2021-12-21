@@ -19,7 +19,11 @@ echo $sFeedback;
 function createAccount ($jsonUserData) {
     $objUserData = json_decode($jsonUserData);
     $sSQL = "INSERT INTO Users (username, password) VALUES ('" . $objUserData->username . "', '" . $objUserData->password . "')";
-    return QueryDB ($sSQL);
+    QueryDB ($sSQL);
+    $sSQL = "SELECT * FROM Users WHERE username='" . $objUserData->username . "'";
+    $tResult = QueryDB ($sSQL);
+    $row = $tResult->fetch_assoc();
+    return $row["id"];
 }
 
 function uniqueUN ($sUsername) {
@@ -32,7 +36,13 @@ function login ($jsonCredentials) {
     $objCredentials = json_decode($jsonCredentials);
     $sSQL = "SELECT * FROM Users WHERE username='" . $objCredentials->un . "' AND password='" . $objCredentials->pw . "'";
     $tResult = QueryDB ($sSQL);
-    return 1 == $tResult->num_rows;
+    if (1 != $tResult->num_rows)
+        return false;
+    $row = $tResult->fetch_assoc();
+    $objUserData = new stdClass();
+    $objUserData->id = $row["id"];
+    $objUserData->username = $row["username"];
+    return json_encode($objUserData);
 }
 
 function QueryDB ($sSQL) {

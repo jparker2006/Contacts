@@ -38,7 +38,7 @@
     width: 100%;
     margin: auto;
     text-align: left;
-    text-indent: calc(100% * 0.02);
+    text-indent: calc(100% * 0.01);
     height: 50px;
     font-family: 'Open Sans', sans-serif;
     border: 1px solid #657786;
@@ -52,4 +52,12 @@
 .m_headSearch:focus {
     outline: none;
     border: 1px solid #1DA1F2;
+}
+
+.m_body {
+    height: 400px;
+    width: calc(100% - 120px);
+    margin: auto;
+    margin-top: 65px;
+    border: 2px solid black;
 }

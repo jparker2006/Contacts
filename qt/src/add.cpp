@@ -45,7 +45,7 @@ void Add::on_add_clicked() {
     QJsonDocument jsonContactData;
     jsonContactData.setObject(objContactData);
 
-    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB);
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toLocal8Bit());
 
     QSqlDatabase db = MainWindow::SetUpDatabase();

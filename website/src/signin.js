@@ -1,4 +1,6 @@
-var g_sNoCookiesKey = "";
+"use strict";
+
+var g_objUserData = {};
 
 var onload = function() {
     let UN = getCookie('UN');
@@ -80,25 +82,29 @@ function createAccount() {
         }
     }
 
-    sPassword = HashThis(sPassword, 10000);
+    sPassword = HashThis(sPassword, 20000);
 
     if (document.getElementById('Memory').style.color !== "rgb(185, 9, 11)") {
         setCookie('UN', sUsername, 999);
         setCookie('PW', sPassword, 999);
     }
-    else
-        g_sNoCookiesKey = HashThis(sPassword, 10000);
+
+    g_objUserData.username = sUsername;
+    g_objUserData.password = sPassword;
 
     let objUserData = {};
     objUserData.username = sUsername;
-    objUserData.password = HashThis(sPassword, 20000);
+    objUserData.password = HashThis(sPassword, 10000);
     let jsonUserData = JSON.stringify(objUserData);
     postFileFromServer("srv/signin.php", "createAccount=" + encodeURIComponent(jsonUserData), createAccountCallback);
     function createAccountCallback(data) {
         if (data) {
+            g_objUserData.id = data;
             MainFrame();
             Toast("Account Created");
         }
+        else
+            Toast("Failed to create account");
     }
 }
 
@@ -111,19 +117,20 @@ function checkLogin() {
         return;
     }
     sUsername = HashThis(sUsername, 10000);
-    sPassword = HashThis(sPassword, 10000);
+    sPassword = HashThis(sPassword, 20000);
+
     if (document.getElementById('Memory').style.color !== "rgb(185, 9, 11)") {
         setCookie('UN', sUsername, 999);
         setCookie('PW', sPassword, 999);
     }
-    else
-        g_sNoCookiesKey = sPassword;
 
     Login(sUsername, sPassword);
 }
 
 function Login(UN, PW) {
-    PW = HashThis(PW, 20000);
+    g_objUserData.password = PW;
+
+    PW = HashThis(PW, 10000);
 
     let objCredentials = {};
     objCredentials.un = UN;
@@ -132,10 +139,16 @@ function Login(UN, PW) {
 
     postFileFromServer("srv/signin.php", "login=" + encodeURIComponent(jsonCredentials), LogInCallback);
     function LogInCallback(data) {
-        if (data)
+        if (data) {
+            let objUserData = JSON.parse(data);
+            g_objUserData.id = objUserData.id;
+            g_objUserData.username = objUserData.username;
             MainFrame();
-        else
+        }
+        else {
             Toast("Login failed");
+            g_objUserData = {};
+        }
     }
 }
 
