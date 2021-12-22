@@ -33,8 +33,12 @@ void ContactsWindow::pullData() {
     pull.bindValue(":id", this->id);
     pull.exec();
     while (pull.next()) {
-        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(pull.value(1).toByteArray(), pw.toLocal8Bit())));
+        QByteArray ba_pullData = pull.value(1).toByteArray();
+        QString b = QUrl::fromPercentEncoding(ba_pullData);
+        QByteArray frHex = QByteArray::fromHex(b.toUtf8());
+        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(frHex, pw.toUtf8())));
         QJsonObject objContactData = jsonContactData.object();
+
         if (objContactData["first"].toString().isEmpty()) {
             QListWidgetItem *item = new QListWidgetItem();
             item->setData(-1, pull.value(0).toInt());
@@ -64,8 +68,12 @@ void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
 
-    QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toLocal8Bit())));
+    QByteArray ba_pullData = query.value(0).toByteArray();
+    QString b = QUrl::fromPercentEncoding(ba_pullData);
+    QByteArray frHex = QByteArray::fromHex(b.toUtf8());
+    QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(frHex, pw.toUtf8())));
     QJsonObject objContactData = jsonContactData.object();
+
     w->EditFrame(item->data(-1).toInt(), objContactData, this->pw);
 }
 

@@ -1,5 +1,6 @@
 #include "include/add.h"
 #include "include/mainwindow.h"
+#include <QDebug>
 
 extern MainWindow *w;
 
@@ -46,7 +47,11 @@ void Add::on_add_clicked() {
     jsonContactData.setObject(objContactData);
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
-    QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toLocal8Bit());
+    QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toUtf8());
+    encodedText = encodedText.toHex();
+    encodedText = QUrl::toPercentEncoding(encodedText);
+
+    delete cipher;
 
     QSqlDatabase db = MainWindow::SetUpDatabase();
 
@@ -65,5 +70,6 @@ void Add::passUserData(QString un, QString key, int id) {
     this->key = key;
     this->id = id;
 }
+
 
 

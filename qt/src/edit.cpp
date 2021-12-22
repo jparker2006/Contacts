@@ -96,7 +96,9 @@ void Edit::on_add_clicked() {
     jsonContactData.setObject(objContactData);
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
-    QByteArray encodedText = cipher->encode(jsonContactData.toJson(), this->key.toLocal8Bit());
+    QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toUtf8());
+    encodedText = encodedText.toHex();
+    encodedText = QUrl::toPercentEncoding(encodedText);
 
     QSqlDatabase db = MainWindow::SetUpDatabase();
 

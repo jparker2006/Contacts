@@ -92,7 +92,7 @@ function addContact() {
 
     let jsonContactData = JSON.stringify(objContactData);
 
-    jsonContactData = CryptoJS.AES.encrypt(jsonContactData, g_objUserData.password, {
+    jsonContactData = CryptoJS.AES.encrypt(jsonContactData, decodeURI(g_objUserData.password), {
         mode: CryptoJS.mode.ECB
     });
 
@@ -105,16 +105,13 @@ function addContact() {
     postFileFromServer("srv/main.php", "addContact=" + encodeURIComponent(jsonPostData), addContactCallback);
     function addContactCallback(data) {
         if (data) {
-            data = decodeURIComponent(data);
-            alert(AESDecrypt(data, g_objUserData.password));
+            alert(AESDecrypt(hex2a(decodeURIComponent(data)), decodeURI(g_objUserData.password)));
+            MainFrame();
         }
         else
             alert("nun here");
     }
 }
-
-
-
 
 
 
