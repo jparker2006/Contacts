@@ -92,20 +92,28 @@ function addContact() {
 
     let jsonContactData = JSON.stringify(objContactData);
 
-    jsonContactData = CryptoJS.AES.encrypt(jsonContactData, decodeURI(g_objUserData.password), {
-        mode: CryptoJS.mode.ECB
-    });
+    let sKey = g_objUserData.password.substring(0, 32);
+    let sIV = g_objUserData.password.substring(32);
+
+    jsonContactData = CryptoJS.AES.encrypt(jsonContactData, sKey, {iv: sIV});
 
     let objPostData = {};
     objPostData.id = g_objUserData.id;
-    objPostData.data = encodeURIComponent(jsonContactData);
+    objPostData.data = jsonContactData;
+
+    alert(objPostData.data);
+
+    let text = AESDecrypt(objPostData.data);
+    alert(text);
+
+    return;
 
     let jsonPostData = JSON.stringify(objPostData);
 
     postFileFromServer("srv/main.php", "addContact=" + encodeURIComponent(jsonPostData), addContactCallback);
     function addContactCallback(data) {
         if (data) {
-            alert(AESDecrypt(hex2a(decodeURIComponent(data)), decodeURI(g_objUserData.password)));
+            alert(AESDecrypt(data));
             MainFrame();
         }
         else
@@ -113,5 +121,9 @@ function addContact() {
     }
 }
 
+CryptoJS.pad.NoPadding={pad:function(){},unpad:function(){}};
+CryptoJS.pad.ZeroPadding={pad:function(a,c){var b=4*c;a.clamp();a.sigBytes+=b-(a.sigBytes%b||b)},unpad:function(a){for(var c=a.words,b=a.sigBytes-1;!(c[b>>>2]>>>24-8*(b%4)&255);)b--;a.sigBytes=b+1}};
+
+CryptoJS.mode.ECB=function(){var a=CryptoJS.lib.BlockCipherMode.extend();a.Encryptor=a.extend({processBlock:function(a,b){this._cipher.encryptBlock(a,b)}});a.Decryptor=a.extend({processBlock:function(a,b){this._cipher.decryptBlock(a,b)}});return a}();
 
 

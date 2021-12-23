@@ -12,11 +12,11 @@ function hex2a(hex) {
     return str;
 }
 
-function AESDecrypt(sEncryptedText, sKey) {
-    let decryptedText = CryptoJS.AES.decrypt(sEncryptedText, sKey, {
-        mode: CryptoJS.mode.ECB
-    });
-    return hex2a(CryptoJS.enc.Hex.stringify(decryptedText));
+function AESDecrypt(sEncryptedText) {
+    let sKey = g_objUserData.password.substring(0, 32);
+    let sIV = g_objUserData.password.substring(32);
+    let decryptedText = CryptoJS.AES.decrypt(sEncryptedText, sKey, {iv: sIV});
+    return hex2a(decryptedText.toString());
 }
 
 function Toast(sMess) {

@@ -1,5 +1,6 @@
 QT += core gui sql network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+LIBS += -lcryptopp
 CONFIG += c++11
 SOURCES += \
     crypto/qaesencryption.cpp \

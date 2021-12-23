@@ -2,6 +2,17 @@
 #include "include/mainwindow.h"
 #include <QDebug>
 
+#include <cryptopp/cryptlib.h>
+#include <cryptopp/hex.h>
+#include <cryptopp/secblock.h>
+#include <cryptopp/modes.h>
+#include <cryptopp/aes.h>
+#include <cryptopp/modes.h>
+#include <cryptopp/osrng.h>
+#include <iostream>
+#include <cryptopp/base64.h>
+#include <cryptopp/filters.h>
+
 extern MainWindow *w;
 
 Add::Add(QWidget *parent): QMainWindow(parent), ui(new Ui::Add) {
@@ -46,30 +57,54 @@ void Add::on_add_clicked() {
     QJsonDocument jsonContactData;
     jsonContactData.setObject(objContactData);
 
-    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
-    QByteArray encodedText = cipher->encode(jsonContactData.toJson(), key.toUtf8());
-    encodedText = encodedText.toHex();
-    encodedText = QUrl::toPercentEncoding(encodedText);
+    std::string text = jsonContactData.toJson(QJsonDocument::Compact).toStdString();
+    std::string sKey = this->key.left(this->key.length() / 2).toStdString();
+    std::string iv = this->key.right(this->key.length() / 2).toStdString();
 
-    delete cipher;
+    QMessageBox *alert = new QMessageBox();
 
-    QSqlDatabase db = MainWindow::SetUpDatabase();
+    std::string cipher = encrypt(text, sKey, iv);
 
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO Contacts (user, data) VALUES (:user, :data)");
-    query.bindValue(":user", this->id);
-    query.bindValue(":data", encodedText);
-    query.exec();
+    alert->setText(QString::fromStdString(cipher));
+    alert->exec();
 
-    db.close();
-    w->MainFrame();
+    std::string dec = decrypt(cipher, sKey, iv);
+    alert->setText(QString::fromStdString(dec));
+    alert->exec();
+
+    return;
+
+
+//    QSqlDatabase db = MainWindow::SetUpDatabase();
+
+//    QSqlQuery query(db);
+//    query.prepare("INSERT INTO Contacts (user, data) VALUES (:user, :data)");
+//    query.bindValue(":user", this->id);
+//    query.bindValue(":data", encodedText);
+//    query.exec();
+
+//    db.close();
+//    w->MainFrame();
 }
+
+std::string Add::encrypt(const std::string& str_in, const std::string& key, const std::string& iv) {
+    std::string str_out;
+    CryptoPP::CBC_Mode<CryptoPP::AES>::Encryption encryption(key, key.length(), iv); // cant be byte arrays or wont sync w js
+    CryptoPP::StringSource encryptor(str_in, true, new CryptoPP::StreamTransformationFilter(encryption, new CryptoPP::StringSink(str_out), CryptoPP::BlockPaddingSchemeDef::PKCS_PADDING));
+    return str_out;
+}
+
+
+std::string Add::decrypt(const std::string& str_in, const std::string& key, const std::string& iv) {
+    std::string str_out;
+    CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption decryption(key, key.length(), iv); // cant be byte arrays or wont sync w js
+    CryptoPP::StringSource decryptor(str_in, true, new CryptoPP::StreamTransformationFilter(decryption, new CryptoPP::StringSink(str_out)));
+    return str_out;
+}
+
 
 void Add::passUserData(QString un, QString key, int id) {
     this->un = un;
     this->key = key;
     this->id = id;
 }
-
-
-

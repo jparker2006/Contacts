@@ -11,6 +11,8 @@
 #include "ui_add.h"
 #include "crypto/qaesencryption.h"
 
+#include <cryptopp/rijndael.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class Add;
@@ -23,6 +25,12 @@ public:
     explicit Add(QWidget *parent = nullptr);
     ~Add();
     void passUserData(QString un, QString pw, int id);
+
+    std::string aes_cbc_mode_encrypt(std::string &plain, std::string key, std::string *iv);
+    std::string aes_cbc_mode_decrypt(std::string &encoded, std::string key, std::string *iv);
+
+    std::string encrypt(const std::string &str_in, const std::string &key, const std::string &iv);
+    std::string decrypt(const std::string &str_in, const std::string &key, const std::string &iv);
 private slots:
     void on_add_clicked();
 private:
