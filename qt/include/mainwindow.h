@@ -10,9 +10,8 @@
 #include "include/login.h"
 #include "include/signup.h"
 #include "include/contactswindow.h"
-#include "include/add.h"
 #include "include/serverdata.h"
-#include "include/edit.h"
+#include "include/entry.h"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -33,7 +32,6 @@ private:
     SignUp *signup = new SignUp();
     Login *login = new Login();
     ContactsWindow *main = new ContactsWindow();
-    Add *add = new Add();
-    Edit *edit = new Edit();
+    Entry *entry = new Entry();
 };
 #endif // MAINWINDOW_H

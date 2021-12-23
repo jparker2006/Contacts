@@ -1,11 +1,9 @@
 QT += core gui sql network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-LIBS += -lcryptopp
 CONFIG += c++11
 SOURCES += \
     crypto/qaesencryption.cpp \
-    src/edit.cpp \
-    src/add.cpp \
+    src/entry.cpp \
     src/contactswindow.cpp \
     crypto/sha3.cpp \
     src/signup.cpp \
@@ -13,18 +11,16 @@ SOURCES += \
     src/mainwindow.cpp \
     src/main.cpp
 HEADERS += \
-    include/edit.h \
+    include/entry.h \
     include/serverdata.h \
     crypto/qaesencryption.h \
-    include/add.h \
     include/contactswindow.h \
     include/mainwindow.h \
     include/login.h \
     include/signup.h \
     crypto/sha3.h
 FORMS += \
-    ui/edit.ui \
-    ui/add.ui \
+    ui/entry.ui \
     ui/contactswindow.ui \
     ui/signup.ui \
     ui/login.ui

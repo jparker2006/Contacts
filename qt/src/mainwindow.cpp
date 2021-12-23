@@ -43,24 +43,22 @@ void MainWindow::MainFrame(QString un, QString pw) {
 }
 
 void MainWindow::MainFrame() {
-    if (add->isEnabled())
-        add->hide();
-    if (edit->isEnabled())
-        edit->hide();
+    if (entry->isEnabled())
+        entry->hide();
     main->show();
     main->pullData();
 }
 
 void MainWindow::AddFrame(QString un, QString pw, int id) {
     main->hide();
-    add->passUserData(un, pw, id);
-    add->show();
+    entry->a_passData(un, pw, id);
+    entry->show();
 }
 
 void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw) {
     main->hide();
-    edit->passData(itemID, objContactData, pw);
-    edit->show();
+    entry->e_passData(objContactData, pw, itemID);
+    entry->show();
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW) { static

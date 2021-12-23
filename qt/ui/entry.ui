@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Add</class>
- <widget class="QMainWindow" name="Add">
+ <class>Entry</class>
+ <widget class="QMainWindow" name="Entry">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>690</width>
     <height>640</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
+    <width>690</width>
     <height>640</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
+    <width>690</width>
     <height>640</height>
    </size>
   </property>
@@ -134,7 +134,7 @@ border-radius: 3px;</string>
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Address</string>
+     <string>Adress</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="work">
@@ -279,7 +279,7 @@ border-radius: 3px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>360</y>
+      <y>290</y>
       <width>285</width>
       <height>60</height>
      </rect>
@@ -305,8 +305,8 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="website">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>360</y>
+      <x>305</x>
+      <y>290</y>
       <width>285</width>
       <height>60</height>
      </rect>
@@ -332,8 +332,8 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="state">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>290</y>
+      <x>10</x>
+      <y>360</y>
       <width>185</width>
       <height>60</height>
      </rect>
@@ -362,9 +362,9 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="zip">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>290</y>
-      <width>191</width>
+      <x>405</x>
+      <y>360</y>
+      <width>185</width>
       <height>60</height>
      </rect>
     </property>
@@ -392,9 +392,9 @@ border-radius: 3px;</string>
    <widget class="QLineEdit" name="city">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>290</y>
-      <width>191</width>
+      <x>207</x>
+      <y>360</y>
+      <width>185</width>
       <height>60</height>
      </rect>
     </property>
@@ -497,7 +497,7 @@ border: 3px solid #78C257;
 border-radius: 3px;</string>
     </property>
     <property name="text">
-     <string>Add</string>
+     <string>Confirm</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="notes">
@@ -527,28 +527,34 @@ border-radius: 3px;</string>
      <string>Notes</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="back">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>120</y>
+      <width>80</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="del">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>200</y>
+      <width>80</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
   </widget>
  </widget>
- <tabstops>
-  <tabstop>first</tabstop>
-  <tabstop>middle</tabstop>
-  <tabstop>last</tabstop>
-  <tabstop>company</tabstop>
-  <tabstop>title</tabstop>
-  <tabstop>home</tabstop>
-  <tabstop>mobile</tabstop>
-  <tabstop>work</tabstop>
-  <tabstop>adress</tabstop>
-  <tabstop>city</tabstop>
-  <tabstop>state</tabstop>
-  <tabstop>zip</tabstop>
-  <tabstop>email</tabstop>
-  <tabstop>website</tabstop>
-  <tabstop>birthday</tabstop>
-  <tabstop>anniversary</tabstop>
-  <tabstop>notes</tabstop>
-  <tabstop>add</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>
