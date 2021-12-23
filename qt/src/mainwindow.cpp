@@ -45,6 +45,7 @@ void MainWindow::MainFrame(QString un, QString pw) {
 void MainWindow::MainFrame() {
     if (entry->isEnabled())
         entry->hide();
+    main->clearAjaxBox();
     main->show();
     main->pullData();
 }

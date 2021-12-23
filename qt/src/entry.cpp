@@ -37,6 +37,7 @@ void Entry::e_setupData() {
     ui->first->setText(objContactData["first"].toString({""}));
     ui->middle->setText(objContactData["middle"].toString({""}));
     ui->last->setText(objContactData["last"].toString({""}));
+    ui->company->setText(objContactData["company"].toString({""}));
     ui->title->setText(objContactData["title"].toString({""}));
     ui->home->setText(objContactData["home"].toString({""}));
     ui->mobile->setText(objContactData["mobile"].toString({""}));
@@ -97,7 +98,7 @@ void Entry::back_clicked() {
 
 void Entry::e_deleteData() {
     QMessageBox *confirm = new QMessageBox();
-    confirm->setWindowTitle("Deleting Contact"); // make contact name?
+    confirm->setWindowTitle("Deleting Contact"); // make contact name
     confirm->setText("Are you sure you want to delete this contact forever?");
     confirm->setStandardButtons(QMessageBox::Yes);
     confirm->addButton(QMessageBox::No);
@@ -117,6 +118,7 @@ void Entry::e_deleteData() {
 
 void Entry::clearTextboxes() {
     ui->first->setText("");
+    ui->company->setText("");
     ui->middle->setText("");
     ui->last->setText("");
     ui->title->setText("");
