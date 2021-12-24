@@ -45,7 +45,7 @@ function AddFrame() {
     sPage += "<input type='input' id='home' placeholder='Home'  />";
     sPage += "<input type='input' id='mobile' placeholder='Mobile'  />";
     sPage += "<input type='input' id='work' placeholder='Work'  />";
-    sPage += "<input type='input' id='adress' placeholder='Address'  />";
+    sPage += "<input type='input' id='address' placeholder='Address'  />";
     sPage += "<input type='input' id='email' placeholder='Email'  />";
     sPage += "<input type='input' id='website' placeholder='Website'  />";
     sPage += "<input type='input' id='state' placeholder='State'  />";
@@ -72,7 +72,7 @@ function addContact() {
     }
 
     let objContactData = {};
-    objContactData.adress = document.getElementById('adress').value;
+    objContactData.address = document.getElementById('address').value;
     objContactData.anniversary = document.getElementById('anniversary').value;
     objContactData.birthday = document.getElementById('birthday').value;
     objContactData.city = document.getElementById('city').value;

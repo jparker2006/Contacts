@@ -38,7 +38,7 @@ private:
     QString un;
     QString pw;
     int id;
-    QVector<QMap<int, QJsonObject>*> *objAllContactData;
+    QMap<int, QJsonObject> objAllContactData;
 };
 
 #endif // CONTACTSWINDOW_H

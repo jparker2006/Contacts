@@ -42,7 +42,7 @@ void Entry::e_setupData() {
     ui->home->setText(objContactData["home"].toString({""}));
     ui->mobile->setText(objContactData["mobile"].toString({""}));
     ui->work->setText(objContactData["work"].toString({""}));
-    ui->adress->setText(objContactData["adress"].toString({""}));
+    ui->address->setText(objContactData["address"].toString({""}));
     ui->email->setText(objContactData["email"].toString({""}));
     ui->website->setText(objContactData["website"].toString({""}));
     ui->state->setText(objContactData["state"].toString({""}));
@@ -125,7 +125,7 @@ void Entry::clearTextboxes() {
     ui->home->setText("");
     ui->mobile->setText("");
     ui->work->setText("");
-    ui->adress->setText("");
+    ui->address->setText("");
     ui->email->setText("");
     ui->website->setText("");
     ui->state->setText("");
@@ -146,7 +146,7 @@ QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
     objContactData["home"] = ui->home->text();
     objContactData["mobile"] = ui->mobile->text();
     objContactData["work"] = ui->work->text();
-    objContactData["adress"] = ui->adress->text();
+    objContactData["address"] = ui->address->text();
     objContactData["email"] = ui->email->text();
     objContactData["website"] = ui->website->text();
     objContactData["state"] = ui->state->text();
@@ -154,6 +154,6 @@ QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
     objContactData["zip"] = ui->zip->text();
     objContactData["birthday"] = ui->birthday->text();
     objContactData["anniversary"] = ui->anniversary->text();
-    objContactData["notes"] = ui->notes->text();
+    objContactData["notes"] = ui->notes->toPlainText();
     return objContactData;
 }

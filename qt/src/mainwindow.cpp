@@ -93,13 +93,17 @@ void MainWindow::ClearCookies() { // just for testing purposes
 
 QSqlDatabase MainWindow::SetUpDatabase() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    //db.setHostName(IP);
-    db.setHostName("192.168.1.112");
-    //db.setPort(PORT);
     db.setDatabaseName("Contacts");
     db.setUserName("jake_contacts");
+    db.setHostName(IP);
+    db.setPort(PORT);
     db.setPassword(DB_PASSWORD);
-    db.open();
+    if (!db.open()) {
+        QMessageBox alert;
+        alert.setText("Database not operating");
+        alert.exec();
+        exit(69);
+    }
     return db;
 }
 
