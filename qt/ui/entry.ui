@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
+    <width>600</width>
     <height>199</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>501</width>
+    <width>600</width>
     <height>199</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>501</width>
+    <width>600</width>
     <height>199</height>
    </size>
   </property>
@@ -26,7 +26,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: #a4e8e0;
+   <string notr="true">background: #040F16;
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -35,7 +35,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>505</width>
+      <width>601</width>
       <height>200</height>
      </rect>
     </property>
@@ -50,21 +50,20 @@
     </property>
     <property name="styleSheet">
      <string notr="true">QTabWidget {
-	background-color: #a4e8e0;
-	color: #a4e8e0;
+	background-color: #040F16;
+	color: #040F16;
 	border: none;
 }
 
 QTabBar::tab {
-  	background: #e1c340;
+  	background: #005E7C;
   	color: white;
   	padding: 10px;
 }
 
 QTabBar::tab:selected {
-  	background: #f8ea8c;
+  	background: #001242;
 	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
 }</string>
     </property>
     <property name="tabPosition">
@@ -74,7 +73,7 @@ QTabBar::tab:selected {
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Name">
      <property name="font">
@@ -92,7 +91,7 @@ QTabBar::tab:selected {
      <widget class="QLineEdit" name="first">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>30</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -101,15 +100,17 @@ QTabBar::tab:selected {
       <property name="font">
        <font>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
         <underline>true</underline>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -124,7 +125,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="middle">
       <property name="geometry">
        <rect>
-        <x>175</x>
+        <x>225</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -133,14 +134,16 @@ color: #4cd7d0;</string>
       <property name="font">
        <font>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -155,7 +158,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="last">
       <property name="geometry">
        <rect>
-        <x>341</x>
+        <x>420</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -164,14 +167,16 @@ color: #4cd7d0;</string>
       <property name="font">
        <font>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -194,16 +199,17 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="company">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>25</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
         <underline>true</underline>
        </font>
       </property>
@@ -211,12 +217,11 @@ color: #4cd7d0;</string>
        <string/>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;
-</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -228,25 +233,25 @@ color: #4cd7d0;
      <widget class="QLineEdit" name="title">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>94</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;
-</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -266,7 +271,7 @@ color: #4cd7d0;
      <widget class="QLineEdit" name="home">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>30</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -274,16 +279,17 @@ color: #4cd7d0;
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 22px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -298,7 +304,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="mobile">
       <property name="geometry">
        <rect>
-        <x>175</x>
+        <x>225</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -306,16 +312,17 @@ color: #4cd7d0;</string>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 22px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -327,7 +334,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="work">
       <property name="geometry">
        <rect>
-        <x>341</x>
+        <x>420</x>
         <y>49</y>
         <width>150</width>
         <height>47</height>
@@ -335,16 +342,17 @@ color: #4cd7d0;</string>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 22px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -364,24 +372,25 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="address">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>94</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -393,7 +402,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="state">
       <property name="geometry">
        <rect>
-        <x>175</x>
+        <x>225</x>
         <y>25</y>
         <width>150</width>
         <height>47</height>
@@ -401,16 +410,17 @@ color: #4cd7d0;</string>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -425,7 +435,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="city">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>30</x>
         <y>25</y>
         <width>150</width>
         <height>47</height>
@@ -433,16 +443,17 @@ color: #4cd7d0;</string>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -457,7 +468,7 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="zip">
       <property name="geometry">
        <rect>
-        <x>341</x>
+        <x>420</x>
         <y>25</y>
         <width>150</width>
         <height>47</height>
@@ -465,16 +476,17 @@ color: #4cd7d0;</string>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="text">
        <string/>
@@ -497,24 +509,25 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="email">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>25</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -526,24 +539,25 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="website">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>94</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -563,24 +577,25 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="birthday">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>25</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -592,24 +607,25 @@ color: #4cd7d0;</string>
      <widget class="QLineEdit" name="anniversary">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>115</x>
         <y>94</y>
-        <width>371</width>
+        <width>370</width>
         <height>47</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 25px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -629,29 +645,68 @@ color: #4cd7d0;</string>
      <widget class="QTextEdit" name="notes">
       <property name="geometry">
        <rect>
-        <x>5</x>
+        <x>10</x>
         <y>5</y>
-        <width>491</width>
+        <width>580</width>
         <height>122</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F5F8FA;
-border: 2px solid #AAB8C2;
+       <string notr="true">background-color: #005384;
+border: 1px solid #5F8169;
 border-radius: 0px;
-font-size: 20px;
-color: #4cd7d0;</string>
+color: white;
+font: 600 19px &quot;Open Sans SemiBold&quot;;</string>
       </property>
       <property name="placeholderText">
        <string>Notes</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="Tags">
+     <attribute name="title">
+      <string>Tags</string>
+     </attribute>
+     <widget class="QListWidget" name="tags_list">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>300</width>
+        <height>146</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QListWidget {
+background: #005E7C;
+font: 600 20px &quot;Open Sans SemiBold&quot;;
+color: #040F16;
+}
+QListWidget:item:selected {
+background: #005E7C;
+color: white;
+border: none;
+}</string>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Image">
+     <attribute name="title">
+      <string>Image</string>
+     </attribute>
     </widget>
     <widget class="QWidget" name="Add">
      <property name="cursor">
@@ -663,16 +718,17 @@ color: #4cd7d0;</string>
      <widget class="QPushButton" name="add">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>75</x>
         <y>43</y>
-        <width>441</width>
+        <width>450</width>
         <height>60</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Open Sans SemiBold</family>
         <pointsize>-1</pointsize>
+        <italic>false</italic>
+        <bold>true</bold>
        </font>
       </property>
       <property name="cursor">
@@ -680,15 +736,16 @@ color: #4cd7d0;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-	background: #426250;
-	border: none;
+	background: #005384;
+	border: 3px solid #005384;
 	border-radius: 0px;
-	font-size: 45px;
-	color: #caeee0;
+	font: 600 45px &quot;Open Sans SemiBold&quot;;
+	color: white;
 }
 
 QPushButton:hover{
-    background: #3ACF3A;
+    background: #5F8169;
+	border: 3px solid #1B2C2B;
 }</string>
       </property>
       <property name="text">
@@ -700,9 +757,9 @@ QPushButton:hover{
    <widget class="QPushButton" name="back">
     <property name="geometry">
      <rect>
-      <x>449</x>
+      <x>554</x>
       <y>0</y>
-      <width>52</width>
+      <width>46</width>
       <height>34</height>
      </rect>
     </property>
@@ -713,9 +770,9 @@ QPushButton:hover{
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #4c5270;
+     <string notr="true">background-color: #0094C6;
 border: none;
-color: #a4e8e0;</string>
+color: white;</string>
     </property>
     <property name="text">
      <string>Back</string>
@@ -724,24 +781,22 @@ color: #a4e8e0;</string>
    <widget class="QPushButton" name="del">
     <property name="geometry">
      <rect>
-      <x>451</x>
+      <x>554</x>
       <y>166</y>
-      <width>50</width>
+      <width>46</width>
       <height>34</height>
      </rect>
     </property>
     <property name="font">
-     <font>
-      <family>Open Sans SemiBold</family>
-     </font>
+     <font/>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #f51720;
+     <string notr="true">background-color: #0094C6;
 border: none;
-color: #a4e8e0;
+color: white;
 border-top-left-radius: 8px;
 </string>
     </property>

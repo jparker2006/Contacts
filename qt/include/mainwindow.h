@@ -21,17 +21,22 @@ public:
     QList<QString> LoadCookies();
     void ClearCookies();
     static QSqlDatabase SetUpDatabase();
+    int id;
 
     void LoginFrame(bool bSignIn);
     void SignUpFrame(bool bLogin);
     void MainFrame(QString un, QString pw);
     void MainFrame(); // coming back from adding item
     void AddFrame(QString un, QString pw, int id);
-    void EditFrame(int itemID, QJsonObject objContactData, QString key);
+    void EditFrame(int itemID, QJsonObject objContactData, QString pw, int nUserID);
+    void HomeFrame();
+
+
 private:
     SignUp *signup = new SignUp();
     Login *login = new Login();
     ContactsWindow *main = new ContactsWindow();
     Entry *entry = new Entry();
+
 };
 #endif // MAINWINDOW_H

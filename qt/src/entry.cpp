@@ -23,11 +23,11 @@ void Entry::a_passData(QString sUn, QString sKey, int nId) {
     ui->del->hide();
 }
 
-
-void Entry::e_passData(QJsonObject objContactData, QString sKey, int nId) {
+void Entry::e_passData(QJsonObject objContactData, QString sKey, int nItemId, int nUserId) {
     this->objContactData = objContactData;
     this->sKey = sKey;
-    this->nItemId = nId;
+    this->nItemId = nItemId;
+    this->nUserId = nUserId;
     this->bAdding = false;
     ui->del->show();
     e_setupData();
@@ -51,6 +51,15 @@ void Entry::e_setupData() {
     ui->birthday->setText(objContactData["birthday"].toString({""}));
     ui->anniversary->setText(objContactData["anniversary"].toString({""}));
     ui->notes->setText(objContactData["notes"].toString({""}));
+
+    setUpTags();
+
+    QList<QString> v_tags = objContactData["tags"].toString().split("~");
+    for (int i=0; i<ui->tags_list->count(); i++) {
+        if (v_tags.contains(ui->tags_list->item(i)->text())) {
+            ui->tags_list->item(i)->setCheckState(Qt::CheckState::Checked);
+        }
+    }
 }
 
 void Entry::enterData() {
@@ -65,6 +74,15 @@ void Entry::enterData() {
     }
 
     QJsonObject objContactData = fetchJsonData(sFirst, sCompany);
+
+    QString v_tags = "";
+    for (int i=0; i<ui->tags_list->count(); i++) {
+        if (!ui->tags_list->item(i)->checkState())
+            continue;
+        v_tags += ui->tags_list->item(i)->text() + "~"; // delim to split
+    }
+    objContactData["tags"] = v_tags.left(v_tags.length() - 1); // cut off last delim
+
     QJsonDocument *jsonContactData = new QJsonDocument();
     jsonContactData->setObject(objContactData);
 
@@ -86,6 +104,7 @@ void Entry::enterData() {
     }
 
     query.exec();
+
     db.close();
     w->MainFrame();
     clearTextboxes();
@@ -134,6 +153,8 @@ void Entry::clearTextboxes() {
     ui->birthday->setText("");
     ui->anniversary->setText("");
     ui->notes->setText("");
+    ui->tabWidget->setCurrentIndex(0);
+    ui->tags_list->clear();
 }
 
 QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
@@ -156,4 +177,26 @@ QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
     objContactData["anniversary"] = ui->anniversary->text();
     objContactData["notes"] = ui->notes->toPlainText();
     return objContactData;
+}
+
+void Entry::setUpTags() {
+    ui->tags_list->clear();
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
+    QSqlDatabase db = MainWindow::SetUpDatabase();
+    QSqlQuery query(db);
+    query.prepare("SELECT name FROM Tags WHERE user=:user");
+    query.bindValue(":user", this->nUserId);
+    query.exec();
+
+    while (query.next()) {
+        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), this->sKey.toUtf8()));
+        QListWidgetItem *currItem = new QListWidgetItem();
+        currItem->setFlags(currItem->flags() | Qt::ItemIsUserCheckable);
+        currItem->setCheckState(Qt::Unchecked);
+        currItem->setText(sCurrTag);
+        currItem->setTextAlignment(Qt::AlignLeft);
+        ui->tags_list->addItem(currItem);
+    }
+    delete cipher;
+    db.close();
 }

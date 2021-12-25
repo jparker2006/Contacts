@@ -31,11 +31,12 @@ void MainWindow::MainFrame(QString un, QString pw) {
     query.exec();
     query.next();
     main->passUserData(un, pw, query.value(0).toInt());
+    this->id = query.value(0).toInt();
     db.close();
 
     if (login->isEnabled())
         login->hide();
-    else if (signup->isEnabled())
+    if (signup->isEnabled())
         signup->hide();
 
     main->show();
@@ -43,23 +44,40 @@ void MainWindow::MainFrame(QString un, QString pw) {
 }
 
 void MainWindow::MainFrame() {
-    if (entry->isEnabled())
+    if (entry->isEnabled()) {
         entry->hide();
+        QPoint pos = entry->pos();
+        main->setGeometry(pos.x() - 200, pos.y() - 200, main->width(), main->height());
+    }
     main->clearAjaxBox();
     main->show();
     main->pullData();
 }
 
 void MainWindow::AddFrame(QString un, QString pw, int id) {
+    QPoint pos = main->pos();
     main->hide();
     entry->a_passData(un, pw, id);
+    entry->setGeometry(pos.x() + 200, pos.y() + 200, entry->width(), entry->height());
+    entry->setUpTags();
     entry->show();
 }
 
-void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw) {
+void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw, int nUserID) {
+    QPoint pos = main->pos();
     main->hide();
-    entry->e_passData(objContactData, pw, itemID);
+    entry->setUpTags();
+    entry->e_passData(objContactData, pw, itemID, nUserID);
+    entry->setGeometry(pos.x() + 200, pos.y() + 200, entry->width(), entry->height());
+
     entry->show();
+}
+
+void MainWindow::HomeFrame() {
+    QMessageBox alert;
+    alert.setText("pooper");
+    alert.exec();
+    return;
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW) { static

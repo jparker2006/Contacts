@@ -24,12 +24,14 @@ public:
     void a_passData(QString sUn, QString sKey, int nId);
     void a_removeDeleteButton();
 
-    void e_passData(QJsonObject objContactData, QString sKey, int nId);
+    void e_passData(QJsonObject objContactData, QString sKey, int nItemId, int nUserId);
     void e_setupData();
     void e_addDeleteButton();
 
     void clearTextboxes();
     QJsonObject fetchJsonData(QString sFirst, QString sCompany);
+    void setUpTags();
+
 private slots:
     void enterData();
     void back_clicked();
