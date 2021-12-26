@@ -8,6 +8,9 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QPixmap>
+#include <QBuffer>
 
 #include "ui_entry.h"
 
@@ -31,11 +34,12 @@ public:
     void clearTextboxes();
     QJsonObject fetchJsonData(QString sFirst, QString sCompany);
     void setUpTags();
-
+    int enterImage();
 private slots:
     void enterData();
     void back_clicked();
     void e_deleteData();
+    void on_imageBtn_clicked();
 
 private:
     Ui::Entry *ui;
@@ -45,6 +49,9 @@ private:
     QString sUn;
     QJsonObject objContactData;
     bool bAdding; // true if on adding frame
+    QPixmap px_scaledImage;
+    bool bImageSelected;
+    QString sImageType;
 };
 
 #endif // ENTRY_H

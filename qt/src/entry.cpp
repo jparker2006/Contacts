@@ -60,6 +60,23 @@ void Entry::e_setupData() {
             ui->tags_list->item(i)->setCheckState(Qt::CheckState::Checked);
         }
     }
+
+    if (-1 == objContactData["image"].toInt()) // no image
+        return;
+
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
+    QSqlDatabase db = MainWindow::SetUpDatabase();
+    QSqlQuery query(db);
+    query.prepare("SELECT picture FROM Images WHERE id=:id");
+    query.bindValue(":id", objContactData["image"].toInt());
+    query.exec();
+    query.next();
+
+    QByteArray bArray2 = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), this->sKey.toUtf8()));
+    QImage img = QImage::fromData(bArray2);
+
+    ui->imageDisplay->setPixmap(QPixmap::fromImage(img).scaled(300, 300, Qt::KeepAspectRatio));
+    delete cipher;
 }
 
 void Entry::enterData() {
@@ -82,6 +99,9 @@ void Entry::enterData() {
         v_tags += ui->tags_list->item(i)->text() + "~"; // delim to split
     }
     objContactData["tags"] = v_tags.left(v_tags.length() - 1); // cut off last delim
+
+    // add image id to json
+    objContactData["image"] = enterImage(); // if -1 no image was entered
 
     QJsonDocument *jsonContactData = new QJsonDocument();
     jsonContactData->setObject(objContactData);
@@ -155,6 +175,10 @@ void Entry::clearTextboxes() {
     ui->notes->setText("");
     ui->tabWidget->setCurrentIndex(0);
     ui->tags_list->clear();
+    ui->imageDisplay->clear();
+    px_scaledImage = QPixmap();
+    this->bImageSelected = false;
+    this->sImageType = "";
 }
 
 QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
@@ -200,3 +224,65 @@ void Entry::setUpTags() {
     delete cipher;
     db.close();
 }
+
+void Entry::on_imageBtn_clicked() {
+    this->bImageSelected = false;
+    QString sFileName = QFileDialog::getOpenFileName(this, tr("Choose file"), "", tr("Images (*.png *.jpg *.gif)"));
+    if (sFileName.isEmpty())
+        return;
+
+    QImage image;
+    bool bValid = image.load(sFileName);
+    if (!bValid) { // maybe alert
+        return;
+    }
+    px_scaledImage = QPixmap::fromImage(image).scaled(300, 300, Qt::KeepAspectRatio);
+    this->bImageSelected = true;
+    this->sImageType = sFileName.right(3);
+    ui->imageDisplay->resize(px_scaledImage.size()); // center label
+    ui->imageDisplay->setPixmap(px_scaledImage);
+
+    enterImage();
+}
+
+int Entry::enterImage() {
+    if (!bImageSelected)
+        return -1;
+    QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
+    QSqlDatabase db = MainWindow::SetUpDatabase();
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO Images (user, picture) VALUES (:id, :data)");
+    query.bindValue(":id", this->nUserId);
+
+    QByteArray bArray;
+    QBuffer buffer(&bArray);
+    buffer.open(QIODevice::WriteOnly);
+
+    if ("png" == this->sImageType)
+        px_scaledImage.save(&buffer, "PNG");
+    else if ("jpg" == this->sImageType)
+        px_scaledImage.save(&buffer, "JPG");
+    else if ("gif" == this->sImageType)
+        px_scaledImage.save(&buffer, "GIF");
+    else {
+        QMessageBox alert;
+        alert.setText("Invalid image type");
+        alert.exec();
+        delete cipher;
+        return -1;
+    }
+    bArray = cipher->encode(bArray, this->sKey.toUtf8());
+
+    query.bindValue(":data", bArray); // gotta encrypt
+    query.exec();
+    query.clear();
+
+    query.prepare("SELECT id FROM Images WHERE user=:id AND picture=:picture"); // base this off contact id
+    query.bindValue(":id", this->nUserId);
+    query.bindValue(":picture", bArray);
+    query.exec();
+    query.next();
+
+    return query.value(0).toInt();
+}
+

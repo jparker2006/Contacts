@@ -263,6 +263,7 @@ void ContactsWindow::on_createTag_clicked() {
 
     db.close();
     delete cipher;
+    ui->s_tags->clear();
     pullTags();
 }
 
@@ -284,8 +285,10 @@ void ContactsWindow::pullTags() {
 }
 
 void ContactsWindow::on_s_tags_currentTextChanged(const QString &sTag) {
-    if ("Tags (default)" == sTag)
+    if ("Tags (default)" == sTag) {
+        on_s_first_clicked();
         return;
+    }
 
     ui->list->clear();
 

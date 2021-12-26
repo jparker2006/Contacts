@@ -18,3 +18,11 @@ user VARCHAR(7),
 name varbinary(100)
 );
 
+// this has to be part of the contact json
+CREATE TABLE Images (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+user VARCHAR(7),
+contact VARCHAR(7),
+picture varbinary(65000)
+);
+
