@@ -37,7 +37,7 @@ background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0.0 #000022, stop:
       <x>250</x>
       <y>85</y>
       <width>580</width>
-      <height>422</height>
+      <height>445</height>
      </rect>
     </property>
     <property name="font">
@@ -69,7 +69,7 @@ border: none;
     <property name="geometry">
      <rect>
       <x>35</x>
-      <y>467</y>
+      <y>490</y>
       <width>160</width>
       <height>40</height>
      </rect>
@@ -416,9 +416,9 @@ background: #001242;
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>425</y>
+      <y>477</y>
       <width>180</width>
-      <height>5</height>
+      <height>1</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -431,6 +431,39 @@ border-bottom: 1px solid white;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteTags">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>425</y>
+      <width>160</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>17</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font: 300 17pt &quot;Open Sans Light&quot;;
+background: #000022;
+border: 1px solid white;
+}
+QPushButton:hover {
+background: #001242;
+}</string>
+    </property>
+    <property name="text">
+     <string>Delete Tags</string>
     </property>
    </widget>
   </widget>

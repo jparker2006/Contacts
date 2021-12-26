@@ -40,6 +40,7 @@ private slots:
     void on_s_location_clicked();
     void on_createTag_clicked();
     void on_s_tags_currentTextChanged(const QString &sTag);
+    void on_deleteTags_clicked();
 
 private:
     Ui::ContactsWindow *ui;

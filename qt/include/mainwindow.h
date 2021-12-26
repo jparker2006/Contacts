@@ -12,6 +12,7 @@
 #include "include/contactswindow.h"
 #include "include/serverdata.h"
 #include "include/entry.h"
+#include "include/deletetags.h"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -30,13 +31,13 @@ public:
     void AddFrame(QString un, QString pw, int id);
     void EditFrame(int itemID, QJsonObject objContactData, QString pw, int nUserID);
     void HomeFrame();
-
-
+    void DeleteTagsFrame(int id, QString sKey, QMap<int, QJsonObject> objAllData);
 private:
     SignUp *signup = new SignUp();
     Login *login = new Login();
     ContactsWindow *main = new ContactsWindow();
     Entry *entry = new Entry();
+    DeleteTags *delTags = new DeleteTags();
 
 };
 #endif // MAINWINDOW_H

@@ -33,6 +33,7 @@ void ContactsWindow::on_add_clicked() {
 
 void ContactsWindow::pullData() { // needs a refactor
     ui->list->clear();
+    ui->s_tags->clear();
     QMap<int, QJsonObject> objAllContactData = {};
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
@@ -82,7 +83,7 @@ void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
     QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toUtf8())));
     QJsonObject objContactData = jsonContactData.object();
 
-    w->EditFrame(item->data(-1).toInt(), objContactData, this->pw, 1); // gonna be an issue
+    w->EditFrame(item->data(-1).toInt(), objContactData, this->pw, this->id); // gonna be an issue
 }
 
 void ContactsWindow::on_s_first_clicked() {
@@ -266,7 +267,6 @@ void ContactsWindow::on_createTag_clicked() {
 }
 
 void ContactsWindow::pullTags() {
-    ui->s_tags->clear();
     ui->s_tags->addItem("Tags (default)");
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
@@ -299,10 +299,16 @@ void ContactsWindow::on_s_tags_currentTextChanged(const QString &sTag) {
         QJsonObject jsonCurrent = iter.value();
 
         QList<QString> v_tags = jsonCurrent["tags"].toString().split("~");
-        for (int i=0; i<ui->s_tags->count() - 1; i++) {
-            if (!v_tags.contains(sTag))
-                return;
+        bool bContains = false;
+        for (int i=0; i<ui->s_tags->count(); i++) {
+            if (v_tags.contains(sTag)) {
+                bContains = true;
+                break;
+            }
         }
+
+        if (!bContains)
+            continue; // go next iter
 
         if (jsonCurrent["first"].toString().isEmpty())
             item->setText(jsonCurrent["company"].toString());
@@ -311,5 +317,10 @@ void ContactsWindow::on_s_tags_currentTextChanged(const QString &sTag) {
         item->setTextAlignment(Qt::AlignCenter);
         ui->list->addItem(item);
     }
+}
+
+
+void ContactsWindow::on_deleteTags_clicked() {
+    w->DeleteTagsFrame(this->id, this->pw, this->objAllContactData);
 }
 

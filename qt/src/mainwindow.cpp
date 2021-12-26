@@ -32,6 +32,12 @@ void MainWindow::MainFrame(QString un, QString pw) {
     query.next();
     main->passUserData(un, pw, query.value(0).toInt());
     this->id = query.value(0).toInt();
+
+    query.clear();
+    query.prepare("UPDATE Users SET lastlogin=CURRENT_TIMESTAMP WHERE username=:username");
+    query.bindValue(":username", un);
+    query.exec();
+
     db.close();
 
     if (login->isEnabled())
@@ -49,9 +55,14 @@ void MainWindow::MainFrame() {
         QPoint pos = entry->pos();
         main->setGeometry(pos.x() - 200, pos.y() - 200, main->width(), main->height());
     }
+    if (delTags->isEnabled()) {
+        delTags->hide();
+        QPoint pos = delTags->pos();
+        main->setGeometry(pos.x() - 200, pos.y(), main->width(), main->height());
+    }
     main->clearAjaxBox();
+    main->pullData(); // error here
     main->show();
-    main->pullData();
 }
 
 void MainWindow::AddFrame(QString un, QString pw, int id) {
@@ -71,6 +82,14 @@ void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw, i
     entry->setGeometry(pos.x() + 200, pos.y() + 200, entry->width(), entry->height());
 
     entry->show();
+}
+
+void MainWindow::DeleteTagsFrame(int id, QString sKey, QMap<int, QJsonObject> objAllData) {
+    QPoint pos = main->pos();
+    main->hide();
+    delTags->passData(id, sKey, objAllData);
+    delTags->setGeometry(pos.x() + 200, pos.y(), entry->width(), entry->height());
+    delTags->show();
 }
 
 void MainWindow::HomeFrame() {
