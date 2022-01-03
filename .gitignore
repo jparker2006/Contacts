@@ -74,5 +74,5 @@ Thumbs.db
 build-Contacts-Desktop-Release
 build-Contacts-Desktop-Release*
 
-serverdata.h.h
-qt/include/serverdata.h
+*serverdata.h
+desktop app/main/include/serverdata.h
