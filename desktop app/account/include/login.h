@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include "ui_login.h"
-#include "crypto/sha3.h"
+#include "main/crypto/sha3.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

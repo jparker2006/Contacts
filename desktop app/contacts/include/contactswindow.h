@@ -10,7 +10,7 @@
 #include <QInputDialog>
 
 #include "ui_contactswindow.h"
-#include "crypto/qaesencryption.h"
+#include "main/crypto/qaesencryption.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

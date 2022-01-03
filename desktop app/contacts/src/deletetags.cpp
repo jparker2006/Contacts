@@ -1,5 +1,5 @@
-#include "include/deletetags.h"
-#include "include/mainwindow.h"
+#include "contacts/include/deletetags.h"
+#include "main/include/mainwindow.h"
 
 extern MainWindow *w;
 

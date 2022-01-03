@@ -198,7 +198,7 @@ background: #001242;
      <string>First Name</string>
     </property>
    </widget>
-   <widget class="QLabel" name="account_settings">
+   <widget class="QLabel" name="home">
     <property name="geometry">
      <rect>
       <x>776</x>
@@ -211,13 +211,13 @@ background: #001242;
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Account Settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>Home</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #040F16;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/images/Account128.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/images/home64.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="contactsLogo">
@@ -230,10 +230,10 @@ background: #001242;
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="toolTip">
-     <string>Home</string>
+     <string/>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000022;</string>
@@ -252,10 +252,10 @@ background: #001242;
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="toolTip">
-     <string>Home</string>
+     <string/>
     </property>
     <property name="styleSheet">
      <string notr="true">font: 300 28pt &quot;Open Sans Light&quot;;

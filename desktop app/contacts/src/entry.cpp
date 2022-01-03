@@ -1,5 +1,5 @@
-#include "include/entry.h"
-#include "include/mainwindow.h"
+#include "contacts/include/entry.h"
+#include "main/include/mainwindow.h"
 extern MainWindow *w;
 
 Entry::Entry(QWidget *parent): QMainWindow(parent), ui(new Ui::Entry) {

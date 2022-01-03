@@ -1,5 +1,5 @@
-#include "include/signup.h"
-#include "include/mainwindow.h"
+#include "account/include/signup.h"
+#include "main/include/mainwindow.h"
 
 extern MainWindow *w;
 

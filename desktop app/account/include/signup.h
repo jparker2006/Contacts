@@ -7,7 +7,7 @@
 #include <QSqlQuery>
 
 #include "ui_signup.h"
-#include "crypto/sha3.h"
+#include "main/crypto/sha3.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,5 +1,5 @@
-#include "include/contactswindow.h"
-#include "include/mainwindow.h"
+#include "contacts/include/contactswindow.h"
+#include "main/include/mainwindow.h"
 
 extern MainWindow *w;
 

@@ -1,4 +1,4 @@
-#include "include/mainwindow.h"
+#include "main/include/mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     QList<QString> cookies = LoadCookies();

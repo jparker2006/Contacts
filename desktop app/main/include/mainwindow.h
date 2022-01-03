@@ -7,12 +7,12 @@
 #include <QSettings>
 #include <QList>
 
-#include "include/login.h"
-#include "include/signup.h"
-#include "include/contactswindow.h"
-#include "include/serverdata.h"
-#include "include/entry.h"
-#include "include/deletetags.h"
+#include "account/include/login.h"
+#include "account/include/signup.h"
+#include "contacts/include/contactswindow.h"
+#include "main/include/serverdata.h"
+#include "contacts/include/entry.h"
+#include "contacts/include/deletetags.h"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT

@@ -1,4 +1,4 @@
-#include "include/mainwindow.h"
+#include "main/include/mainwindow.h"
 MainWindow *w;
 
 int main(int argc, char *argv[]) {
