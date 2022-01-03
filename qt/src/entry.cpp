@@ -241,8 +241,6 @@ void Entry::on_imageBtn_clicked() {
     this->sImageType = sFileName.right(3);
     ui->imageDisplay->resize(px_scaledImage.size()); // center label
     ui->imageDisplay->setPixmap(px_scaledImage);
-
-    enterImage();
 }
 
 int Entry::enterImage() {
