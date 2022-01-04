@@ -16,8 +16,8 @@ ContactsWindow::~ContactsWindow() {
 void ContactsWindow::mousePressEvent(QMouseEvent *event) {
     int nX = event->pos().x();
     int nY = event->pos().y();
-    if (nX >= 10 && nX <= 220 && nY >= 10 && nY <= 74) {
-        HomeFrame();
+    if (nX >= 776 && nX <= 840 && nY >= 10 && nY <= 74) {
+        w->HomeFrame();
     }
 }
 

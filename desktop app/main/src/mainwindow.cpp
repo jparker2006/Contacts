@@ -53,7 +53,7 @@ void MainWindow::MainFrame() {
     if (entry->isEnabled()) {
         entry->hide();
         QPoint pos = entry->pos();
-        main->setGeometry(pos.x() - 200, pos.y() - 200, main->width(), main->height());
+        main->setGeometry(pos.x() - 200, pos.y() - 200, main->width(), main->height()); // error
     }
     if (delTags->isEnabled()) {
         delTags->hide();
@@ -93,10 +93,8 @@ void MainWindow::DeleteTagsFrame(int id, QString sKey, QMap<int, QJsonObject> ob
 }
 
 void MainWindow::HomeFrame() {
-    QMessageBox alert;
-    alert.setText("pooper");
-    alert.exec();
-    return;
+    main->hide(); // main is contacts window main
+    homepage->show();
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW) { static
