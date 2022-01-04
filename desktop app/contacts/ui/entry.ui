@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>459</width>
+    <height>345</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>400</height>
+    <width>459</width>
+    <height>345</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>400</height>
+    <width>459</width>
+    <height>345</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,8 +35,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>601</width>
-      <height>400</height>
+      <width>459</width>
+      <height>300</height>
      </rect>
     </property>
     <property name="font">
@@ -73,7 +73,7 @@ QTabBar::tab:selected {
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="Name">
      <property name="font">
@@ -91,9 +91,9 @@ QTabBar::tab:selected {
      <widget class="QLineEdit" name="first">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>49</y>
-        <width>150</width>
+        <x>10</x>
+        <y>27</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -125,9 +125,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="middle">
       <property name="geometry">
        <rect>
-        <x>225</x>
-        <y>49</y>
-        <width>150</width>
+        <x>168</x>
+        <y>27</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -158,9 +158,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="last">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>49</y>
-        <width>150</width>
+        <x>324</x>
+        <y>27</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -188,20 +188,12 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
        <string>Last</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="Work">
-     <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <attribute name="title">
-      <string>Work</string>
-     </attribute>
      <widget class="QLineEdit" name="company">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>25</y>
-        <width>370</width>
+        <x>10</x>
+        <y>192</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -233,9 +225,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="title">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>94</y>
-        <width>370</width>
+        <x>10</x>
+        <y>110</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -271,9 +263,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="home">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>49</y>
-        <width>150</width>
+        <x>79</x>
+        <y>27</y>
+        <width>301</width>
         <height>47</height>
        </rect>
       </property>
@@ -304,9 +296,9 @@ font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="mobile">
       <property name="geometry">
        <rect>
-        <x>225</x>
-        <y>49</y>
-        <width>150</width>
+        <x>79</x>
+        <y>110</y>
+        <width>301</width>
         <height>47</height>
        </rect>
       </property>
@@ -334,9 +326,9 @@ font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="work">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>49</y>
-        <width>150</width>
+        <x>79</x>
+        <y>192</y>
+        <width>301</width>
         <height>47</height>
        </rect>
       </property>
@@ -372,9 +364,9 @@ font: 600 21px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="address">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>94</y>
-        <width>370</width>
+        <x>10</x>
+        <y>57</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -402,9 +394,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="state">
       <property name="geometry">
        <rect>
-        <x>225</x>
-        <y>25</y>
-        <width>150</width>
+        <x>168</x>
+        <y>162</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -435,9 +427,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="city">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>25</y>
-        <width>150</width>
+        <x>10</x>
+        <y>162</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -468,9 +460,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="zip">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>25</y>
-        <width>150</width>
+        <x>324</x>
+        <y>162</y>
+        <width>125</width>
         <height>47</height>
        </rect>
       </property>
@@ -509,9 +501,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="email">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>25</y>
-        <width>370</width>
+        <x>10</x>
+        <y>57</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -539,9 +531,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="website">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>94</y>
-        <width>370</width>
+        <x>10</x>
+        <y>162</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -577,9 +569,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="birthday">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>25</y>
-        <width>370</width>
+        <x>10</x>
+        <y>57</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -607,9 +599,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QLineEdit" name="anniversary">
       <property name="geometry">
        <rect>
-        <x>115</x>
-        <y>94</y>
-        <width>370</width>
+        <x>10</x>
+        <y>162</y>
+        <width>439</width>
         <height>47</height>
        </rect>
       </property>
@@ -646,9 +638,9 @@ font: 600 23px &quot;Open Sans SemiBold&quot;;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>5</y>
-        <width>580</width>
-        <height>122</height>
+        <y>10</y>
+        <width>439</width>
+        <height>246</height>
        </rect>
       </property>
       <property name="font">
@@ -677,10 +669,10 @@ font: 600 19px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QListWidget" name="tags_list">
       <property name="geometry">
        <rect>
-        <x>150</x>
+        <x>10</x>
         <y>10</y>
-        <width>300</width>
-        <height>146</height>
+        <width>439</width>
+        <height>246</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -710,10 +702,10 @@ border: none;
      <widget class="QLabel" name="imageDisplay">
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>10</y>
-        <width>300</width>
-        <height>300</height>
+        <x>130</x>
+        <y>55</y>
+        <width>200</width>
+        <height>200</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -730,10 +722,10 @@ font: 600 19px &quot;Open Sans SemiBold&quot;;</string>
      <widget class="QPushButton" name="imageBtn">
       <property name="geometry">
        <rect>
-        <x>19</x>
-        <y>111</y>
-        <width>211</width>
-        <height>91</height>
+        <x>10</x>
+        <y>10</y>
+        <width>439</width>
+        <height>35</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -741,7 +733,7 @@ font: 600 19px &quot;Open Sans SemiBold&quot;;</string>
 	background: #005384;
 	border: 3px solid #005384;
 	border-radius: 0px;
-	font: 600 45px &quot;Open Sans SemiBold&quot;;
+	font: 600 20px &quot;Open Sans SemiBold&quot;;
 	color: white;
 }
 
@@ -751,52 +743,7 @@ QPushButton:hover{
 }</string>
       </property>
       <property name="text">
-       <string>Select</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="Add">
-     <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <attribute name="title">
-      <string>Add</string>
-     </attribute>
-     <widget class="QPushButton" name="add">
-      <property name="geometry">
-       <rect>
-        <x>75</x>
-        <y>43</y>
-        <width>450</width>
-        <height>60</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <italic>false</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background: #005384;
-	border: 3px solid #005384;
-	border-radius: 0px;
-	font: 600 45px &quot;Open Sans SemiBold&quot;;
-	color: white;
-}
-
-QPushButton:hover{
-    background: #5F8169;
-	border: 3px solid #1B2C2B;
-}</string>
-      </property>
-      <property name="text">
-       <string>Confirm</string>
+       <string>Select Image</string>
       </property>
      </widget>
     </widget>
@@ -804,34 +751,10 @@ QPushButton:hover{
    <widget class="QPushButton" name="back">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>366</y>
-      <width>46</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font/>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #0094C6;
-border: none;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Back</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="del">
-    <property name="geometry">
-     <rect>
-      <x>554</x>
-      <y>366</y>
-      <width>46</width>
-      <height>34</height>
+      <x>0</x>
+      <y>300</y>
+      <width>50</width>
+      <height>45</height>
      </rect>
     </property>
     <property name="font">
@@ -844,16 +767,67 @@ color: white;</string>
      <string notr="true">background-color: #0094C6;
 border: none;
 color: white;
-border-top-left-radius: 8px;
-</string>
+border-top-right-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="del">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>300</y>
+      <width>50</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font/>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #040F16;
+border: 3px solid crimson;
+color: white;
+border-top-right-radius: 8px;
+border-top-left-radius: 8px;</string>
     </property>
     <property name="text">
      <string>Delete</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="add">
+    <property name="geometry">
+     <rect>
+      <x>409</x>
+      <y>300</y>
+      <width>50</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font/>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #0094C6;
+border: none;
+color: white;
+border-top-left-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
    <zorder>tabWidget</zorder>
    <zorder>del</zorder>
    <zorder>back</zorder>
+   <zorder>add</zorder>
   </widget>
  </widget>
  <resources/>

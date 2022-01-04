@@ -20,6 +20,7 @@ void Entry::a_passData(QString sUn, QString sKey, int nId) {
     this->sKey = sKey;
     this->nUserId = nId;
     this->bAdding = true;
+    ui->add->setText("Add");
     ui->del->hide();
 }
 
@@ -30,6 +31,7 @@ void Entry::e_passData(QJsonObject objContactData, QString sKey, int nItemId, in
     this->nUserId = nUserId;
     this->bAdding = false;
     ui->del->show();
+    ui->add->setText("Save");
     e_setupData();
 }
 
@@ -75,7 +77,7 @@ void Entry::e_setupData() {
     QByteArray bArray2 = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), this->sKey.toUtf8()));
     QImage img = QImage::fromData(bArray2);
 
-    ui->imageDisplay->setPixmap(QPixmap::fromImage(img).scaled(300, 300, Qt::KeepAspectRatio));
+    ui->imageDisplay->setPixmap(QPixmap::fromImage(img).scaled(200, 200));
     delete cipher;
 }
 
@@ -147,6 +149,14 @@ void Entry::e_deleteData() {
 
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery deleteQuery(db);
+
+    if (-1 != this->objContactData["image"].toInt()) {
+        deleteQuery.prepare("DELETE FROM Images WHERE id=:id");
+        deleteQuery.bindValue(":id", this->objContactData["image"].toInt());
+        deleteQuery.exec();
+    }
+
+    deleteQuery.clear();
     deleteQuery.prepare("DELETE FROM Contacts WHERE id=:id");
     deleteQuery.bindValue(":id", this->nItemId);
     deleteQuery.exec();
@@ -236,10 +246,10 @@ void Entry::on_imageBtn_clicked() {
     if (!bValid) { // maybe alert
         return;
     }
-    px_scaledImage = QPixmap::fromImage(image).scaled(300, 300, Qt::KeepAspectRatio);
+    px_scaledImage = QPixmap::fromImage(image).scaled(200, 200);
     this->bImageSelected = true;
     this->sImageType = sFileName.right(3);
-    ui->imageDisplay->resize(px_scaledImage.size()); // center label
+    // ui->imageDisplay->resize(px_scaledImage.size()); // center label
     ui->imageDisplay->setPixmap(px_scaledImage);
 }
 
