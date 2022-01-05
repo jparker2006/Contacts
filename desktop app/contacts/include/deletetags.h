@@ -15,7 +15,7 @@ class DeleteTags: public QMainWindow {
 public:
     explicit DeleteTags(QWidget *parent = nullptr);
     ~DeleteTags();
-    void passData(int nId, QString sKey, QMap<int, QJsonObject> objAllData);
+    void passData(QMap<int, QJsonObject> objAllData);
     void pullListData();
     void deleteTagFromAllUsers(QString sTag);
     void deleteTag(int nTagId);
@@ -25,8 +25,6 @@ private slots:
 
 private:
     Ui::DeleteTags *ui;
-    int nId;
-    QString sKey;
     QMap<int, QJsonObject> objData;
 };
 

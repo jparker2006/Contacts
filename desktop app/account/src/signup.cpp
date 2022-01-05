@@ -61,7 +61,7 @@ void SignUp::on_create_clicked() {
     db.close();
     ui->label->setText("account created!");
 
-    w->MainFrame(QString::fromStdString(sHashedUN), sAESPw);
+    w->ContactsFrame();
 }
 
 

@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/windowicon128.png</file>
         <file>images/logo64.png</file>
         <file>images/Account128.png</file>
         <file>images/home64.png</file>
+        <file>images/mainLogo64.png</file>
+        <file>images/github64.png</file>
     </qresource>
 </RCC>

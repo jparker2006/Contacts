@@ -23,19 +23,23 @@ public:
     QList<QString> LoadCookies();
     void ClearCookies();
     static QSqlDatabase SetUpDatabase();
+
     int id;
+    QString sUsername;
+    QString sPassword;
 
     void LoginFrame(bool bSignIn);
     void SignUpFrame(bool bLogin);
-    void MainFrame(QString un, QString pw);
-    void MainFrame(); // coming back from adding item
-    void AddFrame(QString un, QString pw, int id);
-    void EditFrame(int itemID, QJsonObject objContactData, QString pw, int nUserID);
+    void ContactsFrame(); // coming back from adding item
+    void AddFrame();
+    void EditFrame(int itemID, QJsonObject objContactData);
     void HomeFrame();
-    void DeleteTagsFrame(int id, QString sKey, QMap<int, QJsonObject> objAllData);
+    void DeleteTagsFrame(QMap<int, QJsonObject> objAllData);
 
     Home *homepage = new Home();
 private:
+
+
     SignUp *signup = new SignUp();
     Login *login = new Login();
     ContactsWindow *main = new ContactsWindow();

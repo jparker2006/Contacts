@@ -11,10 +11,6 @@ SOURCES += \
     account/src/signup.cpp \
     account/src/login.cpp \
     main/src/mainwindow.cpp \
-    animations/point3.cpp \
-    animations/part.cpp \
-    animations/particle.cpp \
-    animations/firework.cpp \
     main/src/main.cpp
 HEADERS += \
     contacts/include/deletetags.h \
@@ -26,11 +22,7 @@ HEADERS += \
     main/include/mainwindow.h \
     account/include/login.h \
     account/include/signup.h \
-    main/crypto/sha3.h \
-    animations/point3.h \
-    animations/particle.h \
-    animations/firework.h \
-    animations/part.h
+    main/crypto/sha3.
 FORMS += \
     contacts/ui/deletetags.ui \
     contacts/ui/entry.ui \

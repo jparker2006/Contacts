@@ -12,9 +12,7 @@ DeleteTags::~DeleteTags() {
     delete ui;
 }
 
-void DeleteTags::passData(int nId, QString sKey, QMap<int, QJsonObject> objAllData) {
-    this->nId = nId;
-    this->sKey = sKey;
+void DeleteTags::passData(QMap<int, QJsonObject> objAllData) {
     this->objData = objAllData;
     pullListData();
 }
@@ -25,11 +23,11 @@ void DeleteTags::pullListData() {
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
     query.prepare("SELECT id, name FROM Tags WHERE user=:user");
-    query.bindValue(":user", this->nId);
+    query.bindValue(":user", w->id);
     query.exec();
 
     while (query.next()) {
-        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(1).toByteArray(), this->sKey.toUtf8()));
+        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(1).toByteArray(), w->sPassword.toUtf8()));
         QListWidgetItem *currItem = new QListWidgetItem();
         currItem->setFlags(currItem->flags() | Qt::ItemIsUserCheckable);
         currItem->setCheckState(Qt::Unchecked);
@@ -43,7 +41,7 @@ void DeleteTags::pullListData() {
 }
 
 void DeleteTags::on_back_clicked() {
-    w->MainFrame();
+    w->ContactsFrame();
 }
 
 void DeleteTags::on_confirm_clicked() {
@@ -51,7 +49,7 @@ void DeleteTags::on_confirm_clicked() {
         if (ui->list->item(i)->checkState())
             deleteTag(ui->list->item(i)->data(-1).toInt());
     }
-    w->MainFrame();
+    w->ContactsFrame();
 }
 
 void DeleteTags::deleteTag(int nTagId) { // might have to individually remove tag from all contacts

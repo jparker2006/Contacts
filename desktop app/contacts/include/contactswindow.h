@@ -23,12 +23,10 @@ class ContactsWindow: public QMainWindow {
 public:
     explicit ContactsWindow(QWidget *parent = nullptr);
     ~ContactsWindow();
-    void passUserData(QString un, QString pw, int id);
     void pullData();
     QList<QJsonObject> fetchSortedData(QString sCatagory);
     bool partOfJsonInAjax(QJsonObject objData, QString sAjax);
     void clearAjaxBox();
-    void HomeFrame();
     void mousePressEvent(QMouseEvent *event);
     void pullTags();
 private slots:

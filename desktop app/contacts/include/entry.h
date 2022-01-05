@@ -24,10 +24,10 @@ public:
     explicit Entry(QWidget *parent = nullptr);
     ~Entry();
 
-    void a_passData(QString sUn, QString sKey, int nId);
+    void a_passData();
     void a_removeDeleteButton();
 
-    void e_passData(QJsonObject objContactData, QString sKey, int nItemId, int nUserId);
+    void e_passData(QJsonObject objContactData, int nItemId);
     void e_setupData();
     void e_addDeleteButton();
 
@@ -35,6 +35,7 @@ public:
     QJsonObject fetchJsonData(QString sFirst, QString sCompany);
     void setUpTags();
     int enterImage();
+
 private slots:
     void enterData();
     void back_clicked();
@@ -43,10 +44,7 @@ private slots:
 
 private:
     Ui::Entry *ui;
-    int nUserId;
     int nItemId;
-    QString sKey;
-    QString sUn;
     QJsonObject objContactData;
     bool bAdding; // true if on adding frame
     QPixmap px_scaledImage;

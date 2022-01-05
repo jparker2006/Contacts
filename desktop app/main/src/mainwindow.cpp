@@ -2,10 +2,27 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     QList<QString> cookies = LoadCookies();
-    if (cookies.size() != 2)
+    if (cookies.size() != 2) {
         SignUpFrame(false);
-    else
-        MainFrame(cookies[0], cookies[1]);
+        return;
+    }
+
+    this->sUsername = cookies[0];
+    this->sPassword = cookies[1];
+    QSqlDatabase db = SetUpDatabase();
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM Users WHERE username=:username");
+    query.bindValue(":username", this->sUsername);
+    query.exec();
+    query.next();
+    this->id = query.value(0).toInt();
+    query.clear();
+    query.prepare("UPDATE Users SET lastlogin=CURRENT_TIMESTAMP WHERE username=:username");
+    query.bindValue(":username", this->sUsername);
+    query.exec();
+    db.close();
+    HomeFrame();
 }
 
 void MainWindow::LoginFrame(bool bSignIn) { // true ? delete sign in : none
@@ -22,73 +39,51 @@ void MainWindow::SignUpFrame(bool bLogin) {
     signup->show();
 }
 
-void MainWindow::MainFrame(QString un, QString pw) {
-    QSqlDatabase db = SetUpDatabase();
-
-    QSqlQuery query(db);
-    query.prepare("SELECT id FROM Users WHERE username=:username");
-    query.bindValue(":username", un);
-    query.exec();
-    query.next();
-    main->passUserData(un, pw, query.value(0).toInt());
-    this->id = query.value(0).toInt();
-
-    query.clear();
-    query.prepare("UPDATE Users SET lastlogin=CURRENT_TIMESTAMP WHERE username=:username");
-    query.bindValue(":username", un);
-    query.exec();
-
-    db.close();
+void MainWindow::ContactsFrame() {
+    QList<QString> cookies = LoadCookies(); // coming from login this is neeeded
+    this->sUsername = cookies[0];
+    this->sPassword = cookies[1];
 
     if (login->isEnabled())
         login->hide();
     if (signup->isEnabled())
         signup->hide();
-
-    main->show();
-    main->pullData();
-}
-
-void MainWindow::MainFrame() {
+    if (homepage->isEnabled()) {
+        homepage->hide();
+    }
+    if (homepage->isEnabled()) {
+        homepage->hide();
+    }
     if (entry->isEnabled()) {
         entry->hide();
-        QPoint pos = entry->pos();
-        main->setGeometry(pos.x() - 200, pos.y() - 200, main->width(), main->height()); // error
     }
     if (delTags->isEnabled()) {
         delTags->hide();
-        QPoint pos = delTags->pos();
-        main->setGeometry(pos.x() - 200, pos.y(), main->width(), main->height());
     }
+
     main->clearAjaxBox();
-    main->pullData(); // error here
+    main->pullData();
     main->show();
 }
 
-void MainWindow::AddFrame(QString un, QString pw, int id) {
-    QPoint pos = main->pos();
+void MainWindow::AddFrame() {
     main->hide();
-    entry->a_passData(un, pw, id);
-    entry->setGeometry(pos.x() + 200, pos.y() + 200, entry->width(), entry->height());
+    entry->a_passData(); // really just a_setup
     entry->setUpTags();
     entry->show();
 }
 
-void MainWindow::EditFrame(int itemID, QJsonObject objContactData, QString pw, int nUserID) {
-    QPoint pos = main->pos();
+void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
     main->hide();
     entry->setUpTags();
-    entry->e_passData(objContactData, pw, itemID, nUserID);
-    entry->setGeometry(pos.x() + 200, pos.y() + 200, entry->width(), entry->height());
+    entry->e_passData(objContactData, itemID);
 
     entry->show();
 }
 
-void MainWindow::DeleteTagsFrame(int id, QString sKey, QMap<int, QJsonObject> objAllData) {
-    QPoint pos = main->pos();
+void MainWindow::DeleteTagsFrame(QMap<int, QJsonObject> objAllData) {
     main->hide();
-    delTags->passData(id, sKey, objAllData);
-    delTags->setGeometry(pos.x() + 200, pos.y(), entry->width(), entry->height());
+    delTags->passData(objAllData);
     delTags->show();
 }
 

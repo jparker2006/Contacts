@@ -15,21 +15,17 @@ Entry::~Entry() {
     delete ui;
 }
 
-void Entry::a_passData(QString sUn, QString sKey, int nId) {
-    this->sUn = sUn;
-    this->sKey = sKey;
-    this->nUserId = nId;
+void Entry::a_passData() {
     this->bAdding = true;
     ui->add->setText("Add");
     ui->del->hide();
 }
 
-void Entry::e_passData(QJsonObject objContactData, QString sKey, int nItemId, int nUserId) {
+void Entry::e_passData(QJsonObject objContactData, int nItemId) {
     this->objContactData = objContactData;
-    this->sKey = sKey;
     this->nItemId = nItemId;
-    this->nUserId = nUserId;
     this->bAdding = false;
+
     ui->del->show();
     ui->add->setText("Save");
     e_setupData();
@@ -74,10 +70,13 @@ void Entry::e_setupData() {
     query.exec();
     query.next();
 
-    QByteArray bArray2 = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), this->sKey.toUtf8()));
+    QByteArray bArray2 = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), w->sPassword.toUtf8()));
     QImage img = QImage::fromData(bArray2);
 
     ui->imageDisplay->setPixmap(QPixmap::fromImage(img).scaled(200, 200));
+    this->px_scaledImage = QPixmap::fromImage(img);
+    this->bImageSelected = true;
+    this->sImageType = "jpg"; // error
     delete cipher;
 }
 
@@ -109,14 +108,14 @@ void Entry::enterData() {
     jsonContactData->setObject(objContactData);
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
-    QByteArray ba_jsonContact = cipher->encode(jsonContactData->toJson(QJsonDocument::Compact), sKey.toUtf8());
+    QByteArray ba_jsonContact = cipher->encode(jsonContactData->toJson(QJsonDocument::Compact), w->sPassword.toUtf8());
 
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
 
     if (bAdding) {
         query.prepare("INSERT INTO Contacts (user, data) VALUES (:user, :data)");
-        query.bindValue(":user", this->nUserId);
+        query.bindValue(":user", w->id);
         query.bindValue(":data", ba_jsonContact);
     }
     else {
@@ -128,12 +127,12 @@ void Entry::enterData() {
     query.exec();
 
     db.close();
-    w->MainFrame();
+    w->ContactsFrame();
     clearTextboxes();
 }
 
 void Entry::back_clicked() {
-    w->MainFrame();
+    w->ContactsFrame();
     clearTextboxes();
 }
 
@@ -161,7 +160,7 @@ void Entry::e_deleteData() {
     deleteQuery.bindValue(":id", this->nItemId);
     deleteQuery.exec();
     db.close();
-    w->MainFrame();
+    w->ContactsFrame();
     clearTextboxes();
 }
 
@@ -219,11 +218,11 @@ void Entry::setUpTags() {
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
     query.prepare("SELECT name FROM Tags WHERE user=:user");
-    query.bindValue(":user", this->nUserId);
+    query.bindValue(":user", w->id);
     query.exec();
 
     while (query.next()) {
-        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), this->sKey.toUtf8()));
+        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(0).toByteArray(),  w->sPassword.toUtf8()));
         QListWidgetItem *currItem = new QListWidgetItem();
         currItem->setFlags(currItem->flags() | Qt::ItemIsUserCheckable);
         currItem->setCheckState(Qt::Unchecked);
@@ -253,14 +252,14 @@ void Entry::on_imageBtn_clicked() {
     ui->imageDisplay->setPixmap(px_scaledImage);
 }
 
-int Entry::enterImage() {
-    if (!bImageSelected)
+int Entry::enterImage() { // error when editing
+    if (!bImageSelected && this->bAdding && !this->px_scaledImage.isNull())
         return -1;
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
     query.prepare("INSERT INTO Images (user, picture) VALUES (:id, :data)");
-    query.bindValue(":id", this->nUserId);
+    query.bindValue(":id", w->id);
 
     QByteArray bArray;
     QBuffer buffer(&bArray);
@@ -273,20 +272,18 @@ int Entry::enterImage() {
     else if ("gif" == this->sImageType)
         px_scaledImage.save(&buffer, "GIF");
     else {
-        QMessageBox alert;
-        alert.setText("Invalid image type");
-        alert.exec();
         delete cipher;
         return -1;
     }
-    bArray = cipher->encode(bArray, this->sKey.toUtf8());
 
-    query.bindValue(":data", bArray); // gotta encrypt
+    bArray = cipher->encode(bArray, w->sPassword.toUtf8());
+
+    query.bindValue(":data", bArray);
     query.exec();
     query.clear();
 
-    query.prepare("SELECT id FROM Images WHERE user=:id AND picture=:picture"); // base this off contact id
-    query.bindValue(":id", this->nUserId);
+    query.prepare("SELECT id FROM Images WHERE user=:id AND picture=:picture"); // user could have 2 of same images
+    query.bindValue(":id", w->id);
     query.bindValue(":picture", bArray);
     query.exec();
     query.next();

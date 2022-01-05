@@ -16,22 +16,15 @@ ContactsWindow::~ContactsWindow() {
 void ContactsWindow::mousePressEvent(QMouseEvent *event) {
     int nX = event->pos().x();
     int nY = event->pos().y();
-    if (nX >= 776 && nX <= 840 && nY >= 10 && nY <= 74) {
+    if (nX >= 776 && nX <= 840 && nY >= 10 && nY <= 74)
         w->HomeFrame();
-    }
-}
-
-void ContactsWindow::passUserData(QString un, QString pw, int id) {
-    this->un = un;
-    this->pw = pw;
-    this->id = id;
 }
 
 void ContactsWindow::on_add_clicked() {
-    w->AddFrame(un, pw, id);
+    w->AddFrame();
 }
 
-void ContactsWindow::pullData() { // needs a refactor
+void ContactsWindow::pullData() {
     ui->list->clear();
     ui->s_tags->clear();
     QMap<int, QJsonObject> objAllContactData = {};
@@ -40,11 +33,11 @@ void ContactsWindow::pullData() { // needs a refactor
 
     QSqlQuery pull(db);
     pull.prepare("SELECT id, data FROM Contacts WHERE user=:id");
-    pull.bindValue(":id", this->id);
+    pull.bindValue(":id", w->id);
     pull.exec();
 
     while (pull.next()) {
-        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(pull.value(1).toByteArray(), pw.toUtf8())));
+        QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(pull.value(1).toByteArray(), w->sPassword.toUtf8())));
         QJsonObject objContactData = jsonContactData.object();
         objAllContactData.insert(pull.value(0).toInt(), objContactData);
 
@@ -80,10 +73,10 @@ void ContactsWindow::on_list_itemDoubleClicked(QListWidgetItem *item) {
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
 
-    QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toUtf8())));
+    QJsonDocument jsonContactData = QJsonDocument::fromJson(cipher->removePadding(cipher->decode(query.value(0).toByteArray(), w->sPassword.toUtf8())));
     QJsonObject objContactData = jsonContactData.object();
 
-    w->EditFrame(item->data(-1).toInt(), objContactData, this->pw, this->id); // gonna be an issue
+    w->EditFrame(item->data(-1).toInt(), objContactData);
 }
 
 void ContactsWindow::on_s_first_clicked() {
@@ -224,11 +217,6 @@ void ContactsWindow::clearAjaxBox() {
     ui->ajax->clear();
 }
 
-void ContactsWindow::HomeFrame() {
-    this->setWindowTitle("Home");
-    // w->HomeFrame();
-}
-
 void ContactsWindow::on_createTag_clicked() {
     bool bOkClick;
     QInputDialog mInput;
@@ -252,12 +240,12 @@ void ContactsWindow::on_createTag_clicked() {
     }
 
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
-    QByteArray baTagName = cipher->encode(sTagName.toUtf8(), this->pw.toUtf8());
+    QByteArray baTagName = cipher->encode(sTagName.toUtf8(), w->sPassword.toUtf8());
 
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
     query.prepare("INSERT INTO Tags (user, name) VALUES (:user, :name)");
-    query.bindValue(":user", this->id);
+    query.bindValue(":user", w->id);
     query.bindValue(":name", baTagName);
     query.exec();
 
@@ -273,11 +261,11 @@ void ContactsWindow::pullTags() {
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
     query.prepare("SELECT name FROM Tags WHERE user=:user");
-    query.bindValue(":user", this->id);
+    query.bindValue(":user", w->id);
     query.exec();
 
     while (query.next()) {
-        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), pw.toUtf8()));
+        QString sCurrTag = cipher->removePadding(cipher->decode(query.value(0).toByteArray(), w->sPassword.toUtf8()));
         ui->s_tags->addItem(sCurrTag);
     }
     delete cipher;
@@ -324,6 +312,6 @@ void ContactsWindow::on_s_tags_currentTextChanged(const QString &sTag) {
 
 
 void ContactsWindow::on_deleteTags_clicked() {
-    w->DeleteTagsFrame(this->id, this->pw, this->objAllContactData);
+    w->DeleteTagsFrame(this->objAllContactData);
 }
 
