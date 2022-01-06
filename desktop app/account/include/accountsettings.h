@@ -29,6 +29,7 @@ private slots:
 private:
     Ui::AccountSettings *ui;
     QPixmap px_image;
+    bool bEditing;
 };
 
 #endif // ACCOUNTSETTINGS_H

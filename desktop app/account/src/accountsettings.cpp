@@ -17,9 +17,12 @@ void AccountSettings::setupData() {
     ui->first->setText(w->sFirst);
     ui->last->setText(w->sLast);
 
-    if (0 == MainWindow::LoadImageCookie())
+    if (0 == MainWindow::LoadImageCookie()) {
+        bEditing = false;
         return;
+    }
 
+    bEditing = true;
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
@@ -82,8 +85,15 @@ void AccountSettings::on_confirm_image_clicked() {
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);
-    query.prepare("INSERT INTO Images (user, picture) VALUES (:id, :data)");
-    query.bindValue(":id", w->id);
+
+    if (this->bEditing) {
+        query.prepare("UPDATE Images SET picture=:data WHERE id=:id");
+        query.bindValue(":id", MainWindow::LoadImageCookie());
+    }
+    else {
+        query.prepare("INSERT INTO Images (user, picture) VALUES (:id, :data)");
+        query.bindValue(":id", w->id);
+    }
 
     QByteArray bArray;
     QBuffer buffer(&bArray);
