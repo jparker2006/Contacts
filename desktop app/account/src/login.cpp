@@ -40,7 +40,7 @@ void Login::on_login_clicked() {
 
      // dont think i need this  **   QString sCookiesPw = QString::fromStdString(sHashedPW);
 
-    MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW));
+    MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW), "", "");
 
     for (int i=0; i<10000; i++) {
         sHashedPW = hasher(sHashedPW);
@@ -51,7 +51,7 @@ void Login::on_login_clicked() {
     q_login.bindValue(":username", QString::fromStdString(sHashedUN));
     q_login.bindValue(":password", QString::fromStdString(sHashedPW));
     q_login.exec();
-    1 == q_login.size() ? w->ContactsFrame() : ui->label->setText("login failed");
+    1 == q_login.size() ? w->HomeFrame() : ui->label->setText("login failed");
     db.close();
 }
 

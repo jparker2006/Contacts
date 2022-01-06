@@ -76,7 +76,6 @@ void Entry::e_setupData() {
     ui->imageDisplay->setPixmap(QPixmap::fromImage(img).scaled(200, 200));
     this->px_scaledImage = QPixmap::fromImage(img);
     this->bImageSelected = true;
-    this->sImageType = "jpg"; // error
     delete cipher;
 }
 
@@ -187,7 +186,6 @@ void Entry::clearTextboxes() {
     ui->imageDisplay->clear();
     px_scaledImage = QPixmap();
     this->bImageSelected = false;
-    this->sImageType = "";
 }
 
 QJsonObject Entry::fetchJsonData(QString sFirst, QString sCompany) {
@@ -236,7 +234,7 @@ void Entry::setUpTags() {
 
 void Entry::on_imageBtn_clicked() {
     this->bImageSelected = false;
-    QString sFileName = QFileDialog::getOpenFileName(this, tr("Choose file"), "", tr("Images (*.png *.jpg *.gif)"));
+    QString sFileName = QFileDialog::getOpenFileName(this, tr("Choose file"), "", tr("Images (*.jpg)"));
     if (sFileName.isEmpty())
         return;
 
@@ -247,7 +245,6 @@ void Entry::on_imageBtn_clicked() {
     }
     px_scaledImage = QPixmap::fromImage(image).scaled(200, 200);
     this->bImageSelected = true;
-    this->sImageType = sFileName.right(3);
     // ui->imageDisplay->resize(px_scaledImage.size()); // center label
     ui->imageDisplay->setPixmap(px_scaledImage);
 }
@@ -265,16 +262,7 @@ int Entry::enterImage() { // error when editing
     QBuffer buffer(&bArray);
     buffer.open(QIODevice::WriteOnly);
 
-    if ("png" == this->sImageType)
-        px_scaledImage.save(&buffer, "PNG");
-    else if ("jpg" == this->sImageType)
-        px_scaledImage.save(&buffer, "JPG");
-    else if ("gif" == this->sImageType)
-        px_scaledImage.save(&buffer, "GIF");
-    else {
-        delete cipher;
-        return -1;
-    }
+    px_scaledImage.save(&buffer, "JPG");
 
     bArray = cipher->encode(bArray, w->sPassword.toUtf8());
 

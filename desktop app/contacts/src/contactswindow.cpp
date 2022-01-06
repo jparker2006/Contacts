@@ -310,7 +310,6 @@ void ContactsWindow::on_s_tags_currentTextChanged(const QString &sTag) {
     }
 }
 
-
 void ContactsWindow::on_deleteTags_clicked() {
     w->DeleteTagsFrame(this->objAllContactData);
 }

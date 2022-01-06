@@ -2,6 +2,7 @@ QT += core gui sql network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 SOURCES += \
+    account/src/accountsettings.cpp \
     main/src/home.cpp \
     main/crypto/qaesencryption.cpp \
     contacts/src/deletetags.cpp \
@@ -13,6 +14,7 @@ SOURCES += \
     main/src/mainwindow.cpp \
     main/src/main.cpp
 HEADERS += \
+    account/include/accountsettings.h \
     contacts/include/deletetags.h \
     contacts/include/entry.h \
     main/include/home.h \
@@ -24,6 +26,7 @@ HEADERS += \
     account/include/signup.h \
     main/crypto/sha3.
 FORMS += \
+    account/ui/accountsettings.ui \
     contacts/ui/deletetags.ui \
     contacts/ui/entry.ui \
     contacts/ui/contactswindow.ui \

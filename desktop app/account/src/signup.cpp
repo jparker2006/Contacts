@@ -45,9 +45,9 @@ void SignUp::on_create_clicked() {
         sHashedPW = hasher(sHashedPW);
     }
 
-    QString sAESPw = QString::fromStdString(sHashedPW);
+   //  QString sAESPw = QString::fromStdString(sHashedPW);
 
-    MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW));
+    MainWindow::SaveCookies(QString::fromStdString(sHashedUN), QString::fromStdString(sHashedPW), "", "");
 
     for (int i=0; i<10000; i++) {
         sHashedPW = hasher(sHashedPW);
@@ -61,7 +61,7 @@ void SignUp::on_create_clicked() {
     db.close();
     ui->label->setText("account created!");
 
-    w->ContactsFrame();
+    w->HomeFrame();
 }
 
 

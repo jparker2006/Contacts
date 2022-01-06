@@ -49,7 +49,6 @@ private:
     bool bAdding; // true if on adding frame
     QPixmap px_scaledImage;
     bool bImageSelected;
-    QString sImageType;
 };
 
 #endif // ENTRY_H

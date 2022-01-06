@@ -16,10 +16,10 @@ public:
     explicit Home(QWidget *parent = nullptr);
     ~Home();
     void mousePressEvent(QMouseEvent *event);
+    void setupPFP(QString sPassword);
+
 private:
     Ui::Home *ui;
-    QString sUsername;
-    QString sPassword;
 };
 
 #endif // HOME_H

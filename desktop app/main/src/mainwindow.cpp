@@ -2,26 +2,15 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     QList<QString> cookies = LoadCookies();
-    if (cookies.size() != 2) {
+    if (1 == cookies.size()) {
         SignUpFrame(false);
         return;
     }
 
     this->sUsername = cookies[0];
     this->sPassword = cookies[1];
-    QSqlDatabase db = SetUpDatabase();
-
-    QSqlQuery query(db);
-    query.prepare("SELECT id FROM Users WHERE username=:username");
-    query.bindValue(":username", this->sUsername);
-    query.exec();
-    query.next();
-    this->id = query.value(0).toInt();
-    query.clear();
-    query.prepare("UPDATE Users SET lastlogin=CURRENT_TIMESTAMP WHERE username=:username");
-    query.bindValue(":username", this->sUsername);
-    query.exec();
-    db.close();
+    this->sFirst = cookies[2];
+    this->sLast = cookies[3];
     HomeFrame();
 }
 
@@ -40,10 +29,6 @@ void MainWindow::SignUpFrame(bool bLogin) {
 }
 
 void MainWindow::ContactsFrame() {
-    QList<QString> cookies = LoadCookies(); // coming from login this is neeeded
-    this->sUsername = cookies[0];
-    this->sPassword = cookies[1];
-
     if (login->isEnabled())
         login->hide();
     if (signup->isEnabled())
@@ -61,20 +46,20 @@ void MainWindow::ContactsFrame() {
         delTags->hide();
     }
 
-    main->clearAjaxBox();
-    main->pullData();
-    main->show();
+    contactsWindow->clearAjaxBox();
+    contactsWindow->pullData();
+    contactsWindow->show();
 }
 
 void MainWindow::AddFrame() {
-    main->hide();
+    contactsWindow->hide();
     entry->a_passData(); // really just a_setup
     entry->setUpTags();
     entry->show();
 }
 
 void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
-    main->hide();
+    contactsWindow->hide();
     entry->setUpTags();
     entry->e_passData(objContactData, itemID);
 
@@ -82,21 +67,55 @@ void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
 }
 
 void MainWindow::DeleteTagsFrame(QMap<int, QJsonObject> objAllData) {
-    main->hide();
+    contactsWindow->hide();
     delTags->passData(objAllData);
     delTags->show();
 }
 
-void MainWindow::HomeFrame() {
-    main->hide(); // main is contacts window main
-    homepage->show();
+void MainWindow::AccountSettingsFrame() {
+    homepage->hide();
+    accountSettings->show();
+    accountSettings->setupData();
 }
 
-void MainWindow::SaveCookies(QString UN, QString PW) { static
+void MainWindow::HomeFrame() {
+    QList<QString> cookies = LoadCookies();
+    this->sUsername = cookies[0];
+    this->sPassword = cookies[1];
+    this->sFirst = cookies[2];
+    this->sLast = cookies[3];
+
+    QSqlDatabase db = SetUpDatabase();
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM Users WHERE username=:username");
+    query.bindValue(":username", this->sUsername);
+    query.exec();
+    query.next();
+    this->id = query.value(0).toInt();
+    query.clear();
+    query.prepare("UPDATE Users SET lastlogin=CURRENT_TIMESTAMP WHERE username=:username");
+    query.bindValue(":username", this->sUsername);
+    query.exec();
+    db.close();
+
+    login->hide();
+    signup->hide();
+    contactsWindow->hide();
+    accountSettings->hide();
+
+    homepage->show();
+    if (MainWindow::LoadImageCookie() != 0)
+        homepage->setupPFP(this->sPassword);
+}
+
+void MainWindow::SaveCookies(QString UN, QString PW, QString FIRST, QString LAST) { static
     QSettings cookies("Contacts", "cookies");
     cookies.beginGroup("CookiesGroup");
     cookies.setValue("UN", UN);
     cookies.setValue("PW", PW);
+    cookies.setValue("FIRST", FIRST);
+    cookies.setValue("LAST", LAST);
     cookies.endGroup();
 }
 
@@ -105,20 +124,38 @@ QList<QString> MainWindow::LoadCookies() {
     cookies.beginGroup("CookiesGroup");
     QString un = cookies.value("UN").toString();
     QString pw = cookies.value("PW").toString();
+    QString first = cookies.value("FIRST").toString();
+    QString last = cookies.value("LAST").toString();
     cookies.endGroup();
 
     if (un.isEmpty() || pw.isEmpty())
         return QList<QString> {"no cookies"};
     else
-        return QList<QString> {un, pw};
+        return QList<QString> {un, pw, first, last};
 }
 
-void MainWindow::ClearCookies() { // just for testing purposes
+void MainWindow::ClearCookies() {
     QSettings cookies("Contacts", "cookies");
     cookies.beginGroup("CookiesGroup");
     cookies.setValue("UN", "");
     cookies.setValue("PW", "");
     cookies.endGroup();
+}
+
+void MainWindow::ImageCookie(int id) { static
+    QSettings cookies("Images", "imageCookie");
+    cookies.beginGroup("ImageCookie");
+    cookies.setValue("Id", id);
+    cookies.endGroup();
+}
+
+int MainWindow::LoadImageCookie() { static
+    QSettings cookies("Images", "imageCookie");
+    cookies.beginGroup("ImageCookie");
+    int imgID = cookies.value("Id").toInt();
+    cookies.endGroup();
+
+    return imgID;
 }
 
 QSqlDatabase MainWindow::SetUpDatabase() {

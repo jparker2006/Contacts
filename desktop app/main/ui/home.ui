@@ -112,7 +112,7 @@
       <string>see the code</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/images/github64.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;img src=&quot;:/images/github64.png&quot;/&gt;</string>
      </property>
     </widget>
    </widget>
