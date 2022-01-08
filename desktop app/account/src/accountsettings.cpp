@@ -117,3 +117,57 @@ void AccountSettings::on_confirm_image_clicked() {
     w->HomeFrame();
 }
 
+
+void AccountSettings::on_del_clicked() {
+    bool bOkClick;
+    QInputDialog mInput;
+    QString sPassword = mInput.getText(
+               this, tr("Confirm"),
+               tr("Be careful! This action is irreversible. Type your password to confirm deletion"),
+               QLineEdit::EchoMode::Normal, "", &bOkClick).trimmed();
+
+    if (!bOkClick || sPassword.isEmpty())
+        return;
+
+    SHA3 hasher;
+    std::string sHashedPW = sPassword.toStdString();
+    for (int i=0; i<20000; i++) {
+        sHashedPW = hasher(sHashedPW);
+    }
+    if (QString::fromStdString(sHashedPW) != w->sPassword) {
+        QMessageBox a;
+        a.setText("Password was wrong");
+        a.exec();
+        return;
+    }
+
+    QSqlDatabase db = MainWindow::SetUpDatabase();
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM Images WHERE user=:id");
+    query.bindValue(":id", w->id);
+    query.exec();
+    query.clear();
+
+    query.prepare("DELETE FROM Tags WHERE user=:id");
+    query.bindValue(":id", w->id);
+    query.exec();
+    query.clear();
+
+    query.prepare("DELETE FROM Contacts WHERE user=:id");
+    query.bindValue(":id", w->id);
+    query.exec();
+    query.clear();
+
+    query.prepare("DELETE FROM Users WHERE id=:id");
+    query.bindValue(":id", w->id);
+    query.exec();
+
+    db.close();
+
+    MainWindow::ClearCookies();
+    MainWindow::ImageCookie(0);
+
+    w->SignUpFrame();
+}
+

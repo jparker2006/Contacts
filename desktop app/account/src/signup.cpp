@@ -66,6 +66,6 @@ void SignUp::on_create_clicked() {
 
 
 void SignUp::on_login_clicked() {
-    w->LoginFrame(true);
+    w->LoginFrame();
 }
 

@@ -5,5 +5,6 @@
         <file>images/home64.png</file>
         <file>images/mainLogo64.png</file>
         <file>images/github64.png</file>
+        <file>images/passwordLogo64.png</file>
     </qresource>
 </RCC>

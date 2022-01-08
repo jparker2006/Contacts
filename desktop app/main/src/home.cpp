@@ -30,9 +30,12 @@ void Home::mousePressEvent(QMouseEvent *event) {
 
     if (x >= 165 && x<= 435 && y >= 144 && y <= 244)
         w->ContactsFrame();
+
+    if (x >= 165 && x<= 435 && y >= 249 && y <= 349)
+        w->PasswordFrame();
 }
 
-void Home::setupPFP(QString sPassword) { // temp
+void Home::setupPFP(QString sPassword) {
     QAESEncryption *cipher = new QAESEncryption(QAESEncryption::AES_256, QAESEncryption::ECB, QAESEncryption::PKCS7);
     QSqlDatabase db = MainWindow::SetUpDatabase();
     QSqlQuery query(db);

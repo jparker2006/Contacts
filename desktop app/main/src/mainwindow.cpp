@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     QList<QString> cookies = LoadCookies();
     if (1 == cookies.size()) {
-        SignUpFrame(false);
+        SignUpFrame();
         return;
     }
 
@@ -14,52 +14,32 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     HomeFrame();
 }
 
-void MainWindow::LoginFrame(bool bSignIn) { // true ? delete sign in : none
-    if (bSignIn)
-        signup->hide();
-
+void MainWindow::LoginFrame() { // true ? delete sign in : none
+    HideAllFrames();
     login->show();
 }
 
-void MainWindow::SignUpFrame(bool bLogin) {
-    if (bLogin)
-        login->hide();
-
+void MainWindow::SignUpFrame() {
+    HideAllFrames();
     signup->show();
 }
 
 void MainWindow::ContactsFrame() {
-    if (login->isEnabled())
-        login->hide();
-    if (signup->isEnabled())
-        signup->hide();
-    if (homepage->isEnabled()) {
-        homepage->hide();
-    }
-    if (homepage->isEnabled()) {
-        homepage->hide();
-    }
-    if (entry->isEnabled()) {
-        entry->hide();
-    }
-    if (delTags->isEnabled()) {
-        delTags->hide();
-    }
-
+    HideAllFrames();
     contactsWindow->clearAjaxBox();
     contactsWindow->pullData();
     contactsWindow->show();
 }
 
 void MainWindow::AddFrame() {
-    contactsWindow->hide();
+    HideAllFrames();
     entry->a_passData(); // really just a_setup
     entry->setUpTags();
     entry->show();
 }
 
 void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
-    contactsWindow->hide();
+    HideAllFrames();
     entry->setUpTags();
     entry->e_passData(objContactData, itemID);
 
@@ -67,18 +47,24 @@ void MainWindow::EditFrame(int itemID, QJsonObject objContactData) {
 }
 
 void MainWindow::DeleteTagsFrame(QMap<int, QJsonObject> objAllData) {
-    contactsWindow->hide();
+    HideAllFrames();
     delTags->passData(objAllData);
     delTags->show();
 }
 
 void MainWindow::AccountSettingsFrame() {
-    homepage->hide();
+    HideAllFrames();
     accountSettings->show();
     accountSettings->setupData();
 }
 
+void MainWindow::PasswordFrame() {
+    HideAllFrames();
+    passwordWindow->show();
+}
+
 void MainWindow::HomeFrame() {
+    HideAllFrames();
     QList<QString> cookies = LoadCookies();
     this->sUsername = cookies[0];
     this->sPassword = cookies[1];
@@ -107,6 +93,17 @@ void MainWindow::HomeFrame() {
     homepage->show();
     if (MainWindow::LoadImageCookie() != 0)
         homepage->setupPFP(this->sPassword);
+}
+
+void MainWindow::HideAllFrames() {
+    signup->hide();
+    login->hide();
+    contactsWindow->hide();
+    entry->hide();
+    delTags->hide();
+    homepage->hide();
+    accountSettings->hide();
+    passwordWindow->hide();
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW, QString FIRST, QString LAST) { static

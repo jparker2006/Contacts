@@ -26,6 +26,8 @@ private slots:
 
     void on_confirm_image_clicked();
 
+    void on_del_clicked();
+
 private:
     Ui::AccountSettings *ui;
     QPixmap px_image;

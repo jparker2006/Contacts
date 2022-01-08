@@ -13,7 +13,7 @@ Login::~Login() {
 }
 
 void Login::on_signup_clicked() {
-    w->SignUpFrame(true);
+    w->SignUpFrame();
 }
 
 void Login::on_login_clicked() {
