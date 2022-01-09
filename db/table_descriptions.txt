@@ -28,3 +28,8 @@ contact VARCHAR(7),
 picture varbinary(65000)
 );
 
+CREATE TABLE Passwords (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+user VARCHAR(7),
+data varbinary(4000)
+);

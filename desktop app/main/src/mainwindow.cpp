@@ -7,12 +7,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
         return;
     }
 
-    // dont need any of these
-//    this->sUsername = cookies[0];
-//    this->sPassword = cookies[1];
-//    this->sFirst = cookies[2];
-//    this->sLast = cookies[3];
-
     HomeFrame();
 }
 
@@ -62,11 +56,19 @@ void MainWindow::AccountSettingsFrame() {
 
 void MainWindow::PasswordFrame() {
     HideAllFrames();
+    passwordWindow->pullData();
     passwordWindow->show();
 }
 
 void MainWindow::PW_AddFrame() {
     HideAllFrames();
+    pass_entry->a_setup();
+    pass_entry->show();
+}
+
+void MainWindow::PW_EditFrame(int id) {
+    HideAllFrames();
+    pass_entry->e_setup(id);
     pass_entry->show();
 }
 
@@ -95,9 +97,6 @@ void MainWindow::HomeFrame() {
     homepage->show();
     if (MainWindow::LoadImageCookie() != 0)
         homepage->setupPFP(this->sPassword);
-
-    // here when im making password manager
-    PasswordFrame();
 }
 
 void MainWindow::HideAllFrames() {

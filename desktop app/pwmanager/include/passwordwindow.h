@@ -14,6 +14,12 @@ public:
     ~PasswordWindow();
     void mousePressEvent(QMouseEvent *event);
     void addItem();
+    void pullData();
+private slots:
+    void on_list_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_ajax_textChanged(const QString &arg1);
+
 private:
     Ui::PasswordWindow *ui;
 };

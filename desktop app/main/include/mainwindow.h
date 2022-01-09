@@ -64,6 +64,7 @@ public:
 
     void PasswordFrame();
     void PW_AddFrame();
+    void PW_EditFrame(int id);
 
     void HideAllFrames();
 
