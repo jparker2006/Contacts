@@ -13,7 +13,8 @@ SOURCES += \
     account/src/login.cpp \
     main/src/mainwindow.cpp \
     main/src/main.cpp \
-    passman/src/passwordwindow.cpp
+    pwmanager/src/pw_entry.cpp \
+    pwmanager/src/passwordwindow.cpp
 HEADERS += \
     account/include/accountsettings.h \
     contacts/include/deletetags.h \
@@ -26,7 +27,8 @@ HEADERS += \
     account/include/login.h \
     account/include/signup.h \
     main/crypto/sha3. \
-    passman/include/passwordwindow.h
+    pwmanager/include/pw_entry.h \
+    pwmanager/include/passwordwindow.h
 FORMS += \
     account/ui/accountsettings.ui \
     contacts/ui/deletetags.ui \
@@ -35,7 +37,8 @@ FORMS += \
     account/ui/signup.ui \
     account/ui/login.ui \
     main/ui/home.ui \
-    passman/ui/passwordwindow.ui
+    pwmanager/ui/pw_entry.ui \
+    pwmanager/ui/passwordwindow.ui
 RESOURCES += \
     Resources.qrc
 qnx: target.path = /tmp/$${TARGET}/bin

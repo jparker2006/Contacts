@@ -1,17 +1,7 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-#include <QMainWindow>
-#include <QMessageBox>
 #include <QJsonObject>
-#include <QJsonDocument>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QPushButton>
-#include <QFileDialog>
-#include <QPixmap>
-#include <QBuffer>
-
 #include "ui_entry.h"
 
 namespace Ui {

@@ -1,8 +1,6 @@
 #ifndef ACCOUNTSETTINGS_H
 #define ACCOUNTSETTINGS_H
 
-#include <QMainWindow>
-
 #include "ui_accountsettings.h"
 
 namespace Ui {

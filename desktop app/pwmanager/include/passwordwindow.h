@@ -1,8 +1,6 @@
 #ifndef PASSWORDWINDOW_H
 #define PASSWORDWINDOW_H
 
-#include <QMainWindow>
-
 #include "ui_passwordwindow.h"
 
 namespace Ui {
@@ -15,6 +13,7 @@ public:
     explicit PasswordWindow(QWidget *parent = nullptr);
     ~PasswordWindow();
     void mousePressEvent(QMouseEvent *event);
+    void addItem();
 private:
     Ui::PasswordWindow *ui;
 };

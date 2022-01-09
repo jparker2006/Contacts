@@ -6,9 +6,24 @@
 #include <QIcon>
 #include <QSettings>
 #include <QList>
+#include <QClipboard>
+#include <QMessageBox>
+#include <QJsonDocument>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QPushButton>
+#include <QFileDialog>
+#include <QPixmap>
+#include <QBuffer>
+#include <QInputDialog>
+#include <QMouseEvent>
+#include <QVector>
+#include <QRandomGenerator>
 
 #include "main/include/home.h"
 #include "main/include/serverdata.h"
+#include "main/crypto/qaesencryption.h"
+#include "main/crypto/sha3.h"
 
 #include "account/include/login.h"
 #include "account/include/signup.h"
@@ -18,7 +33,8 @@
 #include "contacts/include/entry.h"
 #include "contacts/include/deletetags.h"
 
-#include "passman/include/passwordwindow.h"
+#include "pwmanager/include/passwordwindow.h"
+#include "pwmanager/include/pw_entry.h"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -37,13 +53,17 @@ public:
 
     void LoginFrame();
     void SignUpFrame();
-    void ContactsFrame(); // coming back from adding item
+
+    void ContactsFrame();
     void AddFrame();
     void EditFrame(int itemID, QJsonObject objContactData);
     void HomeFrame();
     void DeleteTagsFrame(QMap<int, QJsonObject> objAllData);
+
     void AccountSettingsFrame();
+
     void PasswordFrame();
+    void PW_AddFrame();
 
     void HideAllFrames();
 
@@ -58,6 +78,7 @@ private:
     Home *homepage = new Home();
     AccountSettings *accountSettings = new AccountSettings();
     PasswordWindow *passwordWindow = new PasswordWindow();
+    pw_entry *pass_entry = new pw_entry();
 
 };
 #endif // MAINWINDOW_H

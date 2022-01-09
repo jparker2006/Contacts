@@ -1,13 +1,7 @@
 #ifndef SIGNUP_H
 #define SIGNUP_H
 
-#include <QMainWindow>
-#include <QCryptographicHash>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-
 #include "ui_signup.h"
-#include "main/crypto/sha3.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,16 +1,11 @@
 #ifndef CONTACTSWINDOW_H
 #define CONTACTSWINDOW_H
 
-#include <QMainWindow>
-#include <QMessageBox>
-#include <QVector>
+
 #include <QJsonObject>
 #include <QMap>
-#include <QMouseEvent>
-#include <QInputDialog>
 
 #include "ui_contactswindow.h"
-#include "main/crypto/qaesencryption.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

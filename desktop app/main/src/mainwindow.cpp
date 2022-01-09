@@ -7,10 +7,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
         return;
     }
 
-    this->sUsername = cookies[0];
-    this->sPassword = cookies[1];
-    this->sFirst = cookies[2];
-    this->sLast = cookies[3];
+    // dont need any of these
+//    this->sUsername = cookies[0];
+//    this->sPassword = cookies[1];
+//    this->sFirst = cookies[2];
+//    this->sLast = cookies[3];
+
     HomeFrame();
 }
 
@@ -63,6 +65,11 @@ void MainWindow::PasswordFrame() {
     passwordWindow->show();
 }
 
+void MainWindow::PW_AddFrame() {
+    HideAllFrames();
+    pass_entry->show();
+}
+
 void MainWindow::HomeFrame() {
     HideAllFrames();
     QList<QString> cookies = LoadCookies();
@@ -85,14 +92,12 @@ void MainWindow::HomeFrame() {
     query.exec();
     db.close();
 
-    login->hide();
-    signup->hide();
-    contactsWindow->hide();
-    accountSettings->hide();
-
     homepage->show();
     if (MainWindow::LoadImageCookie() != 0)
         homepage->setupPFP(this->sPassword);
+
+    // here when im making password manager
+    PasswordFrame();
 }
 
 void MainWindow::HideAllFrames() {
@@ -104,6 +109,7 @@ void MainWindow::HideAllFrames() {
     homepage->hide();
     accountSettings->hide();
     passwordWindow->hide();
+    pass_entry->hide();
 }
 
 void MainWindow::SaveCookies(QString UN, QString PW, QString FIRST, QString LAST) { static

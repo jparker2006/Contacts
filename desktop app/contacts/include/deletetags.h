@@ -1,8 +1,6 @@
 #ifndef DELETETAGS_H
 #define DELETETAGS_H
 
-#include <QMainWindow>
-
 #include "ui_deletetags.h"
 
 namespace Ui {

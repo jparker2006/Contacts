@@ -1,9 +1,6 @@
 #ifndef HOME_H
 #define HOME_H
 
-#include <QMainWindow>
-#include <QClipboard>
-
 #include "ui_home.h"
 
 namespace Ui {
